@@ -18,7 +18,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     @SerializeField() useThumbnails: bool;
     @SerializeField() sprites: Sprite[];
 
-    private selections: GameObject[];
+    private selections: UICard[];
 
     private cards: Map<number, Sprite> = new Map<number, Sprite>();
 
@@ -29,7 +29,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         if ( GameManager.instance != null ) GameObject.Destroy( this.gameObject );
         else GameManager.instance = this;
 
-        this.selections = GameObject[0];
+        this.selections = [];
     }
 
     Start () {
@@ -96,20 +96,18 @@ export default class GameManager extends ZepetoScriptBehaviour {
         return width;
     }
 
-    SelectCard ( card: GameObject ) {
+    SelectCard ( card: UICard ) {
         this.selections.push( card );
+        card.ShowCard( true );
         if ( this.selections.length >= 2 ) this.CompareSelections();
     }
 
     CompareSelections () {
-        let card1 = this.selections[ 0 ].GetComponent<UICard>();
-        let card2 = this.selections[ 1 ].GetComponent<UICard>();
-
-        if ( card1.id == card2.id ) console.log( "Son iguales!" );
+        if ( this.selections[ 0 ].id == this.selections[ 1 ].id ) console.log( "Son iguales!" );
         else console.log( "Son diferentes!" );
 
-        card1.ShowCard( false );
-        card2.ShowCard( false );
+        this.selections[ 0 ].ShowCard( false );
+        this.selections[ 1 ].ShowCard( false );
 
         for ( let i = 0; i <= this.selections.length; i++ ) this.selections.pop();
     }

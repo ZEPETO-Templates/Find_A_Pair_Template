@@ -19,8 +19,7 @@ export default class UICard extends ZepetoScriptBehaviour {
     }
 
     OnClickCard () {
-        GameManager.instance.SelectCard( this.gameObject );
-        this.ShowCard( true );
+        GameManager.instance.SelectCard( this );
     }
 
     public ShowCard ( show: bool ) {
