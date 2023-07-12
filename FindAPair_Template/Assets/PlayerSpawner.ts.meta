@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 52edd824da02d3144ad9aac182d9a067
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\n// This script spawns a single
+    player\r\nclass PlayerSpawner extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    Start() {\r\n        // Grab the user id specified from logging into zepeto through
+    the editor. \r\n        $extension(\"ZEPETO.Character.Controller.ZepetoPlayersExtension\").CreatePlayerWithUserId(ZEPETO_Character_Controller_1.ZepetoPlayers.instance,
+    ZEPETO_World_1.WorldService.userId, new ZEPETO_Character_Controller_1.SpawnInfo(),
+    true);\r\n        // ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener( ()
+    => {\r\n        //     // const player: LocalPlayer = ZepetoPlayers.instance.LocalPlayer;\r\n       
+    //     let controlUI: UIZepetoPlayerControl = GameObject.FindObjectOfType<UIZepetoPlayerControl>();\r\n       
+    //     console.log( controlUI );\r\n        //     controlUI.gameObject.SetActive(
+    false );\r\n        //     ZepetoPlayers.instance.cameraData.sensitivity = 0;\r\n       
+    //     ZepetoPlayers.instance.cameraData.sensitivity = 5;\r\n        // } );\r\n   
+    }\r\n}\r\nexports.default = PlayerSpawner;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxheWVyU3Bhd25lci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBsYXllclNwYXduZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBc0Q7QUFDdEQsNkVBQXlIO0FBQ3pILCtDQUE0QztBQUc1QyxxQ0FBcUM7QUFDckMsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtJQUc1RCxLQUFLO1FBQ0QsMkVBQTJFO1FBQzNFLGlFQUF1QixzQkFBc0IsQ0FBN0MsMkNBQWEsQ0FBQyxRQUFRLEVBQXlCLDJCQUFZLENBQUMsTUFBTSxFQUFFLElBQUksdUNBQVMsRUFBRSxFQUFFLElBQUksRUFBRztRQUM1RixpRUFBaUU7UUFDakUseUVBQXlFO1FBQ3pFLG1HQUFtRztRQUNuRyxnQ0FBZ0M7UUFDaEMsK0NBQStDO1FBQy9DLHlEQUF5RDtRQUN6RCx5REFBeUQ7UUFDekQsT0FBTztJQUVYLENBQUM7Q0FFSjtBQWpCRCxnQ0FpQkMifQ==","assetPath":"Assets/PlayerSpawner.ts","manifest":{"properties":[],"name":"PlayerSpawner","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: cd5db0aae05cc8aa1c2aec89db91fd07
+  onlyWriteTrigger: 0

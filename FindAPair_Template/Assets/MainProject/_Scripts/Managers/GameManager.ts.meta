@@ -1,0 +1,68 @@
+fileFormatVersion: 2
+guid: 973fbf2751fb4654cb5d2f8acdb422a6
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UICard_1 = require(\"../UICard\");\r\n//
+    This class is responsible for handling everything related to the gameplay of
+    the game, calling other managers if necessary.\r\nclass GameManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.cards
+    = new Map();\r\n    }\r\n    // Awake is called when an enabled script instance
+    is being loaded.\r\n    Awake() {\r\n        // Singleton pattern\r\n       
+    if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Inequality(GameManager.instance,
+    null))\r\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n       
+    else\r\n            GameManager.instance = this;\r\n        this.selections =
+    UnityEngine_1.GameObject[0];\r\n    }\r\n    Start() {\r\n        this.CardsCreation();\r\n       
+    this.MatrixCreation();\r\n    }\r\n    CardsCreation() {\r\n        let counter
+    = 0;\r\n        this.sprites.forEach(sprite => {\r\n            this.cards.set(counter,
+    sprite);\r\n            counter++;\r\n        });\r\n    }\r\n    MatrixCreation()
+    {\r\n        this.LimitPairAmount();\r\n        let width = this.DeterminateWidth();\r\n       
+    let cardsToCreate = this.pairAmount * 2;\r\n        let row = this.CreateRow();\r\n       
+    let rowParent = row.transform;\r\n        let x = 0;\r\n        let y = 0;\r\n       
+    let cardId = 0;\r\n        while (cardsToCreate > 0) {\r\n            if (x ==
+    width && cardsToCreate > 0) {\r\n                row = this.CreateRow();\r\n               
+    rowParent = row.transform;\r\n                y++;\r\n                x = 0;\r\n           
+    }\r\n            let newCard = UnityEngine_1.GameObject.Instantiate(this._card,
+    rowParent);\r\n            let newCardScript = newCard.GetComponent($typeof(UICard_1.default));\r\n           
+    if ((cardsToCreate % 2) == 0 && cardsToCreate != this.pairAmount * 2)\r\n               
+    cardId++;\r\n            if (cardId >= this.cards.size)\r\n                cardId
+    = 0;\r\n            newCardScript.id = cardId;\r\n            newCardScript.showingSprite
+    = this.cards.get(cardId);\r\n            cardsToCreate--;\r\n            x++;\r\n       
+    }\r\n    }\r\n    CreateRow() {\r\n        let obj = UnityEngine_1.GameObject.Instantiate(this._row,
+    this._tableParent);\r\n        return obj;\r\n    }\r\n    LimitPairAmount()
+    {\r\n        if (this.pairAmount <= 1)\r\n            this.pairAmount = 2;\r\n       
+    if (this.pairAmount > 16)\r\n            this.pairAmount = 16;\r\n    }\r\n   
+    DeterminateWidth() {\r\n        let width = 0;\r\n        if (this.pairAmount
+    < 6)\r\n            width = this.pairAmount;\r\n        if (this.pairAmount >
+    6)\r\n            width = this.pairAmount / 2;\r\n        if (this.pairAmount
+    > 12)\r\n            width = 8;\r\n        return width;\r\n    }\r\n    SelectCard(card)
+    {\r\n        this.selections.push(card);\r\n        if (this.selections.length
+    >= 2)\r\n            this.CompareSelections();\r\n    }\r\n    CompareSelections()
+    {\r\n        let card1 = this.selections[0].GetComponent($typeof(UICard_1.default));\r\n       
+    let card2 = this.selections[1].GetComponent($typeof(UICard_1.default));\r\n       
+    if (card1.id == card2.id)\r\n            console.log(\"Son iguales!\");\r\n       
+    else\r\n            console.log(\"Son diferentes!\");\r\n        card1.ShowCard(false);\r\n       
+    card2.ShowCard(false);\r\n        for (let i = 0; i <= this.selections.length;
+    i++)\r\n            this.selections.pop();\r\n    }\r\n}\r\nexports.default =
+    GameManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHYW1lTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFtRTtBQUNuRSxpREFBcUQ7QUFFckQsc0NBQStCO0FBRS9CLDhIQUE4SDtBQUM5SCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBQTlEOztRQWdCWSxVQUFLLEdBQXdCLElBQUksR0FBRyxFQUFrQixDQUFDO0lBNkZuRSxDQUFDO0lBMUZHLG1FQUFtRTtJQUNuRSxLQUFLO1FBQ0Qsb0JBQW9CO1FBQ3BCLElBM0JDLHFDQUFxQixDQW1IazRHLGFBQWMsQ0F4Rmo2RyxXQUFXLENBQUMsUUFBUSxFQUFJLElBQUk7WUFBRyx3QkFBVSxDQUFDLE9BQU8sQ0FBRSxJQUFJLENBQUMsVUFBVSxDQUFFLENBQUM7O1lBQ3JFLFdBQVcsQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDO1FBRWpDLElBQUksQ0FBQyxVQUFVLEdBQUcsd0JBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUNwQyxDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUNyQixJQUFJLENBQUMsY0FBYyxFQUFFLENBQUM7SUFDMUIsQ0FBQztJQUVELGFBQWE7UUFDVCxJQUFJLE9BQU8sR0FBVyxDQUFDLENBQUM7UUFDeEIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUUsTUFBTSxDQUFDLEVBQUU7WUFDM0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUUsT0FBTyxFQUFFLE1BQU0sQ0FBRSxDQUFDO1lBQ2xDLE9BQU8sRUFBRSxDQUFDO1FBQ2QsQ0FBQyxDQUFFLENBQUM7SUFDUixDQUFDO0lBRUQsY0FBYztRQUNWLElBQUksQ0FBQyxlQUFlLEVBQUUsQ0FBQztRQUV2QixJQUFJLEtBQUssR0FBRyxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQztRQUVwQyxJQUFJLGFBQWEsR0FBVyxJQUFJLENBQUMs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","assetPath":"Assets/MainProject/_Scripts/Managers/GameManager.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"pairAmount","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Amount
+    of pairs (min 2 / max 16)\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"_tableParent","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"_row","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"_card","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"mscorlib","name":"useThumbnails","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Card
+    images\""]},{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"sprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"GameManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: e52c9516f2e15b7200f484a9adcdbfd5
+  onlyWriteTrigger: 0
