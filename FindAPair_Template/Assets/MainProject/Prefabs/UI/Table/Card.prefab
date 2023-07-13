@@ -188,9 +188,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   texture: {fileID: 0}
-  icon: {fileID: 8700271851384153055, guid: 1c9846fad99b2425ca0c8cee85b84b88, type: 3}
+  icon: {fileID: 21300000, guid: 595781c43d9584895a738607e96d9731, type: 3}
   iconColor: {r: 0.592152, g: 0, b: 0.5943396, a: 1}
-  iconScale: 0.54
+  iconScale: 0.2
   fillType: 0
   fillAmount: 1
   borderWidth: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
     unityValues:
     - {fileID: 4002331203578919069}
     - {fileID: 0}
-    - {fileID: 8700271851384153055, guid: 1c9846fad99b2425ca0c8cee85b84b88, type: 3}
+    - {fileID: 21300000, guid: 595781c43d9584895a738607e96d9731, type: 3}
     - {fileID: 21300000, guid: 6b3f628cf94aa49d7affa0005a0cfd6a, type: 3}
     - {fileID: 5752100100105605679}
     values:

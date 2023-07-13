@@ -1,4 +1,4 @@
-import { GameObject, Mathf, Sprite, Transform } from 'UnityEngine';
+import { GameObject, Mathf, Random, Sprite, Transform, WaitForSeconds } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { List$1 } from 'System.Collections.Generic';
 import UICard from '../UICard';
@@ -76,7 +76,40 @@ export default class GameManager extends ZepetoScriptBehaviour {
             cardsToCreate--;
             x++;
         }
+        this.ShuffleMatrix();
     }
+
+    ShuffleMatrix () {
+        console.log("Shuffle matrix");
+        
+        // Obtener todas las cartas en la matriz
+        const cards = this._tableParent.GetComponentsInChildren<UICard>( true );
+
+        // Generar una lista de índices para las cartas
+        const indices = new List$1<number>();
+        for ( let i = 0; i < cards.length; i++ )
+        {
+            indices.Add( i );
+        }
+
+        // Cambiar aleatoriamente la posición de las cartas intercambiando sus índices
+        for ( let i = 0; i < cards.length; i++ )
+        {
+            const randomIndex = Mathf.FloorToInt( Random.Range( 0, indices.Count ) );
+            const currentIndex = indices[ i ];
+            const randomSwapIndex = indices[ randomIndex ];
+
+            // Intercambiar las posiciones en la matriz
+            const tempPosition = cards[ currentIndex ].transform.position;
+            cards[ currentIndex ].transform.position = cards[ randomSwapIndex ].transform.position;
+            cards[ randomSwapIndex ].transform.position = tempPosition;
+
+            // Intercambiar los índices en la lista
+            indices[ i ] = randomSwapIndex;
+            indices[ randomIndex ] = currentIndex;
+        }
+    }
+
 
     CreateRow (): GameObject {
         let obj = GameObject.Instantiate( this._row, this._tableParent ) as GameObject;
@@ -99,12 +132,14 @@ export default class GameManager extends ZepetoScriptBehaviour {
     SelectCard ( card: UICard ) {
         this.selections.push( card );
         card.ShowCard( true );
-        if ( this.selections.length >= 2 ) this.CompareSelections();
+        if ( this.selections.length >= 2 ) this.StartCoroutine( this.CompareSelections() );
     }
 
-    CompareSelections () {
+    *CompareSelections () {
         if ( this.selections[ 0 ].id == this.selections[ 1 ].id ) console.log( "Son iguales!" );
         else console.log( "Son diferentes!" );
+
+        yield new WaitForSeconds( 1 );
 
         this.selections[ 0 ].ShowCard( false );
         this.selections[ 1 ].ShowCard( false );
