@@ -12,6 +12,8 @@ export default class UICard extends ZepetoScriptBehaviour {
     public hiddenSprite: Sprite;
     public showingSprite: Sprite;
 
+    private founded: bool;
+    private showing: bool;
     Start () {
         this.btnCard.onClick.AddListener( () => {
             this.OnClickCard();
@@ -19,10 +21,12 @@ export default class UICard extends ZepetoScriptBehaviour {
     }
 
     OnClickCard () {
+        if ( this.founded || this.showing ) return;
         GameManager.instance.SelectCard( this );
     }
 
     public ShowCard ( show: bool ) {
+        this.showing = show;
         if ( show )
         {
             this.image.Icon = this.showingSprite;
@@ -31,5 +35,10 @@ export default class UICard extends ZepetoScriptBehaviour {
         {
             this.image.Icon = this.hiddenSprite;
         }
+    }
+
+    public SetFoundedCard ( foundedCard: bool ) {
+        this.founded = foundedCard;
+        this.ShowCard( foundedCard );
     }
 }

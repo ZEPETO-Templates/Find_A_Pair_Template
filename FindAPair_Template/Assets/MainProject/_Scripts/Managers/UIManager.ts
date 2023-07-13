@@ -1,7 +1,10 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { Color, GameObject, Mathf, Random, Sprite, WaitForSeconds } from 'UnityEngine';
+import { GameObject, WaitForSeconds } from 'UnityEngine';
 import { RoundedRectangleButton, ZepetoText } from 'ZEPETO.World.Gui';
 
+export enum UIPanel {
+    Start, Game, End, None
+}
 // This class is responsible for controlling everything related to the UI and its interactions.
 export default class UIManager extends ZepetoScriptBehaviour {
     public static instance: UIManager; // Singleton instance variable
@@ -14,8 +17,10 @@ export default class UIManager extends ZepetoScriptBehaviour {
     @Header( "References" )
     @SerializeField() playBtn: RoundedRectangleButton;
     @SerializeField() exitBtn: RoundedRectangleButton;
+    @SerializeField() rematchBtn: RoundedRectangleButton;
     @SerializeField() counterObj: GameObject;
     @SerializeField() counterText: ZepetoText;
+    @SerializeField() blocker: GameObject;
 
     @Header( "Settings" )
     @SerializeField() timeToStart: number;
@@ -35,6 +40,13 @@ export default class UIManager extends ZepetoScriptBehaviour {
         this.playBtn.OnClick.AddListener( () => {
             this.StartCoroutine( this.WaitToStart() );
         } );
+        this.rematchBtn.OnClick.AddListener( () => {
+            this.SelectPanel( UIPanel.Game );
+        } );
+        this.exitBtn.OnClick.AddListener( () => {
+            this.SelectPanel();
+        } );
+        this.SelectPanel();
     }
 
     *WaitToStart () {
@@ -50,8 +62,31 @@ export default class UIManager extends ZepetoScriptBehaviour {
         this.counterText.text = "Start!";
         yield new WaitForSeconds( 1 );
         this.counterObj.SetActive( false );
-        this.startPanel.SetActive( false );
-        this.gamePanel.SetActive( true );
+        this.SelectPanel( UIPanel.Game );
     }
 
+    SelectPanel ( panel: UIPanel = UIPanel.None ) {
+        this.startPanel.SetActive( false );
+        this.gamePanel.SetActive( false );
+        this.endPanel.SetActive( false );
+        switch ( panel )
+        {
+            case UIPanel.Start:
+                this.startPanel.SetActive( true );
+                break;
+            case UIPanel.Game:
+                this.gamePanel.SetActive( true );
+                break;
+            case UIPanel.End:
+                this.endPanel.SetActive( true );
+                break;
+            default:
+                this.exitBtn.gameObject.SetActive( false );
+                break;
+        }
+    }
+
+    public ShowBlocker ( show: bool ) {
+        this.blocker.SetActive( show );
+    }
 }

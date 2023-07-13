@@ -2,6 +2,7 @@ import { GameObject, Mathf, Random, Sprite, Transform, WaitForSeconds } from 'Un
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { List$1 } from 'System.Collections.Generic';
 import UICard from '../UICard';
+import UIManager, { UIPanel } from './UIManager';
 
 // This class is responsible for handling everything related to the gameplay of the game, calling other managers if necessary.
 export default class GameManager extends ZepetoScriptBehaviour {
@@ -19,6 +20,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     @SerializeField() sprites: Sprite[];
 
     private selections: UICard[];
+    private pairsFounded: number = 0;
 
     private cards: Map<number, Sprite> = new Map<number, Sprite>();
 
@@ -43,6 +45,15 @@ export default class GameManager extends ZepetoScriptBehaviour {
             this.cards.set( counter, sprite );
             counter++;
         } );
+    }
+
+    ResetMatrix () {
+        const cards = this._tableParent.GetComponentsInChildren<UICard>( true );
+        cards.forEach( card => {
+            card.SetFoundedCard( false );
+        } );
+        this.ShuffleMatrix();
+        this.pairsFounded = 0;
     }
 
     MatrixCreation () {
@@ -80,34 +91,35 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     ShuffleMatrix () {
-        console.log("Shuffle matrix");
-        
-        // Obtener todas las cartas en la matriz
         const cards = this._tableParent.GetComponentsInChildren<UICard>( true );
+        const cardCount = cards.length;
 
-        // Generar una lista de índices para las cartas
+        // Obtener una lista de índices para las cartas
         const indices = new List$1<number>();
-        for ( let i = 0; i < cards.length; i++ )
+        for ( let i = 0; i < cardCount; i++ )
         {
             indices.Add( i );
         }
 
-        // Cambiar aleatoriamente la posición de las cartas intercambiando sus índices
-        for ( let i = 0; i < cards.length; i++ )
+        // Mezclar aleatoriamente los índices
+        for ( let i = 0; i < cardCount; i++ )
         {
-            const randomIndex = Mathf.FloorToInt( Random.Range( 0, indices.Count ) );
+            const randomIndex = Random.Range( 0, indices.Count );
             const currentIndex = indices[ i ];
             const randomSwapIndex = indices[ randomIndex ];
 
-            // Intercambiar las posiciones en la matriz
-            const tempPosition = cards[ currentIndex ].transform.position;
-            cards[ currentIndex ].transform.position = cards[ randomSwapIndex ].transform.position;
-            cards[ randomSwapIndex ].transform.position = tempPosition;
+            // Intercambiar los sprites y los IDs entre las cartas
+            const tempSprite = cards[ currentIndex ].showingSprite;
+            cards[ currentIndex ].showingSprite = cards[ randomSwapIndex ].showingSprite;
+            cards[ randomSwapIndex ].showingSprite = tempSprite;
 
-            // Intercambiar los índices en la lista
-            indices[ i ] = randomSwapIndex;
-            indices[ randomIndex ] = currentIndex;
+            const tempId = cards[ currentIndex ].id;
+            cards[ currentIndex ].id = cards[ randomSwapIndex ].id;
+            cards[ randomSwapIndex ].id = tempId;
         }
+        // cards.forEach( card => {
+        //     card.ShowCard( true );
+        // } );
     }
 
 
@@ -136,14 +148,36 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     *CompareSelections () {
-        if ( this.selections[ 0 ].id == this.selections[ 1 ].id ) console.log( "Son iguales!" );
-        else console.log( "Son diferentes!" );
+        UIManager.instance.ShowBlocker( true );
+        if ( this.selections[ 0 ].id == this.selections[ 1 ].id )
+        {
+            this.selections[ 0 ].SetFoundedCard( true );
+            this.selections[ 1 ].SetFoundedCard( true );
+            this.pairsFounded++;
+            console.log( "PairsFounded:" + this.pairsFounded + " of " + this.pairAmount );
 
-        yield new WaitForSeconds( 1 );
+            yield new WaitForSeconds( 1 );
+            for ( let i = 0; i <= this.selections.length; i++ ) this.selections.pop();
+            this.StartCoroutine( this.CheckForWin() );
+        } else
+        {
+            yield new WaitForSeconds( 1 );
 
-        this.selections[ 0 ].ShowCard( false );
-        this.selections[ 1 ].ShowCard( false );
+            this.selections[ 0 ].ShowCard( false );
+            this.selections[ 1 ].ShowCard( false );
 
-        for ( let i = 0; i <= this.selections.length; i++ ) this.selections.pop();
+            for ( let i = 0; i <= this.selections.length; i++ ) this.selections.pop();
+            UIManager.instance.ShowBlocker( false );
+        }
+    }
+
+    *CheckForWin () {
+        if ( this.pairsFounded == this.pairAmount )
+        {
+            yield new WaitForSeconds( 0.3 );
+            UIManager.instance.SelectPanel( UIPanel.End );
+            this.ResetMatrix();
+        }
+        UIManager.instance.ShowBlocker( false );
     }
 }

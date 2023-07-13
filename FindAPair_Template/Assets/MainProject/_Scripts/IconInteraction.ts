@@ -1,7 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Camera, Canvas, Collider, GameObject, Transform, Object } from 'UnityEngine';
 import { Button } from 'UnityEngine.UI';
-import UIManager from './Managers/UIManager';
+import UIManager, { UIPanel } from './Managers/UIManager';
 import { UIZepetoPlayerControl, ZepetoPlayers } from 'ZEPETO.Character.Controller';
 
 // This class is responsible for creating a floating icon upon which, when clicked, it will execute the game.
@@ -121,9 +121,7 @@ export default class IconInteraction extends ZepetoScriptBehaviour {
     private OnClickIcon () {
         // Activate the game canvas, the start panel, the exit button and deactivate the game and end panels
         this.gameCanvas.SetActive( true );
-        UIManager.instance.startPanel.SetActive( true );
-        UIManager.instance.gamePanel.SetActive( false );
-        UIManager.instance.endPanel.SetActive( false );
+        UIManager.instance.SelectPanel( UIPanel.Start );
         UIManager.instance.exitBtn.gameObject.SetActive( true );
 
         // Call to the function ControlPlayer
