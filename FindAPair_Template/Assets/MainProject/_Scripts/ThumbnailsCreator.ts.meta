@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: da6ea5e82245b224c956b7c505e38117
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nclass
+    ThumbnailsCreator extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Setup(id
+    = null) {\r\n        this.userId = id ? id : ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.userId;\r\n       
+    ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(this.userId, (texture) =>
+    {\r\n            this.sampleImage.sprite = this.GetSprite(texture);\r\n       
+    }, (error) => {\r\n            console.log(error);\r\n        });\r\n    }\r\n   
+    GetSprite(texture) {\r\n        let rect = new UnityEngine_1.Rect(0, 0, texture.width,
+    texture.height);\r\n        return UnityEngine_1.Sprite.Create(texture, rect,
+    new UnityEngine_1.Vector2(0.5, 0.5));\r\n    }\r\n}\r\nexports.default = ThumbnailsCreator;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsc0NyZWF0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaHVtYm5haWxzQ3JlYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCwrQ0FBaUQ7QUFDakQsNkNBQTRGO0FBRTVGLDZFQUE0RDtBQUU1RCxNQUFxQixpQkFBa0IsU0FBUSxxQ0FBcUI7SUFLekQsS0FBSyxDQUFHLEtBQWEsSUFBSTtRQUM1QixJQUFJLENBQUMsTUFBTSxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLE1BQU0sQ0FBQztRQUUvRSxnQ0FBaUIsQ0FBQyxpQkFBaUIsQ0FBRSxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUUsT0FBZ0IsRUFBRyxFQUFFO1lBQ3JFLElBQUksQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUUsT0FBTyxDQUFFLENBQUM7UUFFeEQsQ0FBQyxFQUFFLENBQUUsS0FBSyxFQUFHLEVBQUU7WUFDWCxPQUFPLENBQUMsR0FBRyxDQUFFLEtBQUssQ0FBRSxDQUFDO1FBQ3pCLENBQUMsQ0FBRSxDQUFDO0lBQ1IsQ0FBQztJQUVELFNBQVMsQ0FBRyxPQUFnQjtRQUN4QixJQUFJLElBQUksR0FBUyxJQUFJLGtCQUFJLENBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxPQUFPLENBQUMsS0FBSyxFQUFFLE9BQU8sQ0FBQyxNQUFNLENBQUUsQ0FBQztRQUNqRSxPQUFPLG9CQUFNLENBQUMsTUFBTSxDQUFFLE9BQW9CLEVBQUUsSUFBSSxFQUFFLElBQUkscUJBQU8sQ0FBRSxHQUFHLEVBQUUsR0FBRyxDQUFFLENBQUUsQ0FBQztJQUNoRixDQUFDO0NBQ0o7QUFwQkQsb0NBb0JDIn0=","assetPath":"Assets/MainProject/_Scripts/ThumbnailsCreator.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"userId","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"sampleImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ThumbnailsCreator","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 460e72a5e902349678a7a4ec0a5b26b3
+  onlyWriteTrigger: 0

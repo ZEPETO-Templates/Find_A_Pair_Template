@@ -1,5 +1,5 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
-import { Camera, Canvas, Collider, GameObject, Transform, Object } from 'UnityEngine';
+import { Camera, Canvas, Collider, GameObject, Transform, Object, Vector3 } from 'UnityEngine';
 import { Button } from 'UnityEngine.UI';
 import UIManager, { UIPanel } from './Managers/UIManager';
 import { UIZepetoPlayerControl, ZepetoPlayers } from 'ZEPETO.Character.Controller';
@@ -114,7 +114,7 @@ export default class IconInteraction extends ZepetoScriptBehaviour {
 
     // Update the icon rotation to face the camera
     private UpdateIconRotation () {
-        this._canvas.transform.LookAt( this._cachedWorldCamera.transform );
+        this._canvas.transform.LookAt( this._cachedWorldCamera.transform, Vector3.down );
     }
 
     // Function called when the icon is clicked

@@ -1,6 +1,9 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { GameObject, WaitForSeconds } from 'UnityEngine';
+import { GameObject, RectTransform, Transform, Vector2, WaitForSeconds } from 'UnityEngine';
 import { RoundedRectangleButton, ZepetoText } from 'ZEPETO.World.Gui';
+import GameManager from './GameManager';
+import { Dropdown, InputField } from 'UnityEngine.UI';
+import { List$1 } from 'System.Collections.Generic';
 
 export enum UIPanel {
     Start, Game, End, None
@@ -14,16 +17,25 @@ export default class UIManager extends ZepetoScriptBehaviour {
     @SerializeField() gamePanel: GameObject; // Reference to the game panel 
     @SerializeField() endPanel: GameObject; // Reference to the end panel
 
-    @Header( "References" )
+    @Header( "Buttons" )
     @SerializeField() playBtn: RoundedRectangleButton;
     @SerializeField() exitBtn: RoundedRectangleButton;
     @SerializeField() rematchBtn: RoundedRectangleButton;
+    @SerializeField() addOneBtn: RoundedRectangleButton;
+    @SerializeField() restOneBtn: RoundedRectangleButton;
+
+    @Header( "References" )
     @SerializeField() counterObj: GameObject;
     @SerializeField() counterText: ZepetoText;
     @SerializeField() blocker: GameObject;
+    @SerializeField() pairsFounded: ZepetoText;
+    @SerializeField() totalTries: ZepetoText;
+    @SerializeField() pairsInput: InputField;
 
     @Header( "Settings" )
     @SerializeField() timeToStart: number;
+
+    private pairs: number = 6;
 
     // Awake is called when an enabled script instance is being loaded.
     Awake () {
@@ -38,6 +50,12 @@ export default class UIManager extends ZepetoScriptBehaviour {
 
     SetButtonsLogic () {
         this.playBtn.OnClick.AddListener( () => {
+            this.pairs = GameManager.instance.LimitPairAmount( this.pairs );
+            this.pairsInput.text = this.pairs.toString();
+            GameManager.instance.SetPairAmount( this.pairs );
+            this.addOneBtn.enabled = false;
+            this.restOneBtn.enabled = false;
+            this.pairsInput.enabled = false;
             this.StartCoroutine( this.WaitToStart() );
         } );
         this.rematchBtn.OnClick.AddListener( () => {
@@ -45,6 +63,14 @@ export default class UIManager extends ZepetoScriptBehaviour {
         } );
         this.exitBtn.OnClick.AddListener( () => {
             this.SelectPanel();
+        } );
+        this.addOneBtn.OnClick.AddListener( () => {
+            this.pairs = GameManager.instance.LimitPairAmount( ++this.pairs );
+            this.pairsInput.text = this.pairs.toString();
+        } );
+        this.restOneBtn.OnClick.AddListener( () => {
+            this.pairs = GameManager.instance.LimitPairAmount( --this.pairs );
+            this.pairsInput.text = this.pairs.toString();
         } );
         this.SelectPanel();
     }
@@ -61,6 +87,9 @@ export default class UIManager extends ZepetoScriptBehaviour {
         }
         this.counterText.text = "Start!";
         yield new WaitForSeconds( 1 );
+        this.addOneBtn.enabled = true;
+        this.restOneBtn.enabled = true;
+        this.pairsInput.enabled = true;
         this.counterObj.SetActive( false );
         this.SelectPanel( UIPanel.Game );
     }
@@ -79,6 +108,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
                 break;
             case UIPanel.End:
                 this.endPanel.SetActive( true );
+                this.UpdateTotalTries( GameManager.instance.tries );
                 break;
             default:
                 this.exitBtn.gameObject.SetActive( false );
@@ -88,5 +118,13 @@ export default class UIManager extends ZepetoScriptBehaviour {
 
     public ShowBlocker ( show: bool ) {
         this.blocker.SetActive( show );
+    }
+
+    public UpdatePairsFounded ( pairs: number, pairsLeft: number ) {
+        this.pairsFounded.text = pairs.toString() + " / " + pairsLeft.toString();
+    }
+
+    public UpdateTotalTries ( tries: number ) {
+        this.totalTries.text = tries.toString();
     }
 }

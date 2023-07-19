@@ -21,10 +21,20 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     private selections: UICard[];
     private pairsFounded: number = 0;
+    public tries: number;
 
     private cards: Map<number, Sprite> = new Map<number, Sprite>();
+    private rows: GameObject[];
 
+    SetPairAmount ( amount: number ) {
+        this.pairAmount = amount;
+        this.MatrixDestruction();
+        this.MatrixCreation();
+    }
 
+    GetPairAmount (): number {
+        return this.pairAmount;
+    }
     // Awake is called when an enabled script instance is being loaded.
     Awake (): void {
         // Singleton pattern
@@ -32,6 +42,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
         else GameManager.instance = this;
 
         this.selections = [];
+        this.rows = [];
     }
 
     Start () {
@@ -54,10 +65,15 @@ export default class GameManager extends ZepetoScriptBehaviour {
         } );
         this.ShuffleMatrix();
         this.pairsFounded = 0;
+        this.tries = 0;
+    }
+
+    MatrixDestruction () {
+        for ( let i = 0; i < this.rows.length; i++ ) GameObject.Destroy( this.rows[ i ] );
     }
 
     MatrixCreation () {
-        this.LimitPairAmount();
+        this.pairAmount = this.LimitPairAmount( this.pairAmount );
 
         let width = this.DeterminateWidth();
 
@@ -87,6 +103,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
             cardsToCreate--;
             x++;
         }
+        UIManager.instance.UpdatePairsFounded( this.pairsFounded, this.pairAmount );
         this.ShuffleMatrix();
     }
 
@@ -125,19 +142,22 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     CreateRow (): GameObject {
         let obj = GameObject.Instantiate( this._row, this._tableParent ) as GameObject;
+        this.rows.push( obj );
         return obj;
     }
 
-    LimitPairAmount () {
-        if ( this.pairAmount <= 1 ) this.pairAmount = 2;
-        if ( this.pairAmount > 16 ) this.pairAmount = 16;
+    public LimitPairAmount ( limit: number ): number {
+        if ( limit <= 1 ) limit = 2;
+        if ( limit > 16 ) limit = 16;
+        return limit;
     }
 
     DeterminateWidth (): number {
         let width = 0;
         if ( this.pairAmount < 6 ) width = this.pairAmount;
-        if ( this.pairAmount > 6 ) width = this.pairAmount / 2;
+        if ( this.pairAmount >= 6 ) width = this.pairAmount / 2;
         if ( this.pairAmount > 12 ) width = 8;
+        width = Mathf.RoundToInt( width );
         return width;
     }
 
@@ -148,13 +168,15 @@ export default class GameManager extends ZepetoScriptBehaviour {
     }
 
     *CompareSelections () {
+        this.tries++;
         UIManager.instance.ShowBlocker( true );
         if ( this.selections[ 0 ].id == this.selections[ 1 ].id )
         {
             this.selections[ 0 ].SetFoundedCard( true );
             this.selections[ 1 ].SetFoundedCard( true );
             this.pairsFounded++;
-            console.log( "PairsFounded:" + this.pairsFounded + " of " + this.pairAmount );
+            UIManager.instance.UpdatePairsFounded( this.pairsFounded, this.pairAmount );
+            // console.log( "PairsFounded:" + this.pairsFounded + " of " + this.pairAmount );
 
             yield new WaitForSeconds( 1 );
             for ( let i = 0; i <= this.selections.length; i++ ) this.selections.pop();
