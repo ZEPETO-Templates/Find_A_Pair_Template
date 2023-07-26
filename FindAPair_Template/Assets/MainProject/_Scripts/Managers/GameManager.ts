@@ -163,7 +163,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     SelectCard ( card: UICard ) {
         this.selections.push( card );
-        card.ShowCard( true );
         if ( this.selections.length >= 2 ) this.StartCoroutine( this.CompareSelections() );
     }
 
