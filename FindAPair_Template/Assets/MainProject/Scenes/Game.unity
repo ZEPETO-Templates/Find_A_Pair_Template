@@ -255,21 +255,98 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
-      propertyPath: script.keys.Array.data[6]
+      propertyPath: script.keys.Array.data[1]
+      value: useThumbnails
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[2]
+      value: sprites
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[3]
       value: tries
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[4]
+      value: tableParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[5]
+      value: rowPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[6]
+      value: cardPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[7]
+      value: tableParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[8]
+      value: rowPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.keys.Array.data[9]
+      value: cardPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
       propertyPath: script.values.Array.data[0]
       value: '{"type":"System.Single, mscorlib","value":"6"}'
       objectReference: {fileID: 0}
     - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
-      propertyPath: script.values.Array.data[6]
+      propertyPath: script.values.Array.data[1]
+      value: '{"type":"System.Boolean, mscorlib","value":"False"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.values.Array.data[2]
+      value: '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":24,\"type\":\"UnityEngine.Object,
+        UnityEngine.CoreModule\",\"isUnity\":true}"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.values.Array.data[3]
       value: '{"type":"System.Single, mscorlib","value":"0"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.values.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.values.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.values.Array.data[6]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
       propertyPath: script.unityValues.Array.size
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.unityValues.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.unityValues.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.unityValues.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.unityValues.Array.data[4]
+      value: 
+      objectReference: {fileID: 761872568}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.unityValues.Array.data[5]
+      value: 
+      objectReference: {fileID: 678226096604504484, guid: 54b2b2f8d24f05d4fbce1526faef7e23, type: 3}
+    - target: {fileID: 8494497647054738877, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: script.unityValues.Array.data[6]
+      value: 
+      objectReference: {fileID: 6689074789726875597, guid: ba04f7285ad383949a0bb55ef49ed3c9, type: 3}
     - target: {fileID: 8494497647181773690, guid: af604c66e93788242af4350d4849e0b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
@@ -457,6 +534,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!224 &761872568 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3342043563519232176, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+  m_PrefabInstance: {fileID: 485953096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &972705178
 GameObject:
   m_ObjectHideFlags: 0
