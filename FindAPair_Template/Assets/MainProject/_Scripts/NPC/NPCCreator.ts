@@ -18,6 +18,5 @@ export default class NPCCreator extends ZepetoScriptBehaviour {
         ZepetoCharacterCreator.CreateByZepetoId( this.zepetoId, spawnInfo, ( character: ZepetoCharacter ) => {
             this._npc = character;
         } )
-
     }
 }

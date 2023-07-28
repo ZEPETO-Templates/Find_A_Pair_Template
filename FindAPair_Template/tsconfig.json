@@ -11,6 +11,10 @@
 			}
 		],
 		"types": [
+			"./Library/PackageCache/zepeto.module@0.4.0-preview/Core/Runtime",
+			"./Library/PackageCache/zepeto.module@0.4.0-preview/Shop/Runtime",
+			"./Library/PackageCache/zepeto.module@0.4.0-preview/Social/Runtime",
+			"./Library/PackageCache/zepeto.module@0.4.0-preview/Teleport/Runtime",
 			"./Library/PackageCache/zepeto.world@1.20.0",
 			"./Library/PackageCache/zepeto.world@1.20.0/typings/InputSystem",
 			"./Library/PackageCache/zepeto.world@1.20.0/typings/PostProcessing/Editor",

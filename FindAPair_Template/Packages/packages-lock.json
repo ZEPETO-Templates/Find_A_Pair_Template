@@ -185,6 +185,19 @@
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
+    "zepeto.module": {
+      "version": "0.4.0-preview",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "zepeto.script": "1.11.0",
+        "zepeto.event.bus": "0.4.0",
+        "zepeto.character": "3.1.16",
+        "zepeto.multiplay": "1.9.0",
+        "zepeto.world.gui": "1.2.0-preview"
+      },
+      "url": "https://upm.zepeto.run"
+    },
     "zepeto.multiplay": {
       "version": "1.10.0",
       "depth": 1,

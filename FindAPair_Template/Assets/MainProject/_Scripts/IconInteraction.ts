@@ -121,8 +121,11 @@ export default class IconInteraction extends ZepetoScriptBehaviour {
     private OnClickIcon () {
         // Activate the game canvas, the start panel, the exit button and deactivate the game and end panels
         this.gameCanvas.SetActive( true );
-        UIManager.instance.SelectPanel( UIPanel.Start );
+        UIManager.instance.ShowPanel( UIPanel.Start );
         UIManager.instance.exitBtn.gameObject.SetActive( true );
+
+        // Call to the function to hide de icon
+        this.HideIcon();
 
         // Call to the function ControlPlayer
         this.ControlPlayer( false );
