@@ -29,6 +29,10 @@ export default class UICard extends ZepetoScriptBehaviour {
     OnClickCard () {
         // Check if the two flags are false, if not stop the process
         if ( this.founded || this.showing ) return;
+        
+        // Call to the function show card
+        this.ShowCard(true);
+        
         // Call to the SelectCard function of the GameManager
         GameManager.instance.SelectCard( this );
     }

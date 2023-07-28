@@ -244,10 +244,6 @@ export default class GameManager extends ZepetoScriptBehaviour {
     SelectCard ( card: UICard ) {
         // Push the card passed by parameter into the selections array
         this.selections.push( card );
-
-        // Then show the card into the game
-        card.ShowCard( true );
-
         // Check if the selections are already 2 then start the corountine to compare them
         if ( this.selections.length >= 2 ) this.StartCoroutine( this.CompareSelections() );
     }
