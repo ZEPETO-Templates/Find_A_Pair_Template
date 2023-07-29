@@ -22,7 +22,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
 
     private selections: UICard[]; // This variables saves the selections of the player
     private pairsFounded: number = 0; // This variable saves the amount of pairs that have found the player
-    public tries: number; // This variable saves the amount of tries in the game
+    @HideInInspector() public tries: number; // This variable saves the amount of tries in the game
 
     private cards: Map<number, Sprite> = new Map<number, Sprite>(); // This variables saves the created cards for the use on the game matrix
     private rows: GameObject[]; // This variable saves all the rows created for the game

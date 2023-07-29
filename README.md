@@ -28,26 +28,45 @@ Now, are you ready to start?
 ## 🔨 Tools
 
 **Game prefab**
-To make things easier, there is a prefab called "RPS_Game" that you can drag into your game scene, and the mini-game will be already functional. You just need to place it wherever you want.
+To make things easier, there is a prefab called "FindAPair_Game" that you can drag into your game scene, and the mini-game will be already functional. You just need to place it wherever you want.
 
-<br><img src = "docs/images/rps_prefab.png" alt ="rps prefab img"></img><br>
+<br><img src = "docs/images/fapt_prefab.png" alt ="fapt prefab img"></img><br>
 
 **UIManager**
-In the UIManager you have some options to tweak how the game looks like.
-| Variable         | Utility                                                                       |
-| ---------------- | ----------------------------------------------------------------------------- |
-| Rock Sprite      | Set the rock sprite in game                                                   |
-| Paper Sprite     | Set the Paper sprite in game                                                  |
-| Scissors Sprite  | Set the Scissors  sprite in game                                              |
-| Player Win Color | This color will be in the background of the panel when the player wins a game |
-| Cpu Win Color    | This color will be in the background of the panel when the cpu wins a game    |
+In the UIManager you have the option to select how much it tooks to start the game. (the 3..2..1.. start!)
 
 <br><img src = "docs/images/uimanager.png" alt = "uimanager img"></img><br>
 
 **GameManager**
-The GameManager is the most simple part, it has the variable to set the counter before the start of the game
-(the 3..2..1.. start!)
+The GameManager shows a lot of info.
+
+| Variable       | Utility                                                                                                     |
+| -------------- | ----------------------------------------------------------------------------------------------------------- |
+| Pair amount    | The base amount of cards to create the matrix in the game                                                   |
+| Table Parent   | This variable have the parent of the matrix, where it will be created                                       |
+| Row Prefab     | A reference to the row prefab                                                                               |
+| Card Prefab    | A reference to the card prefab                                                                              |
+| Use thumbnails | This checkbox is to select if you want to use the thumbnails of your followers or the sprites that you want |
+| Sprites        | The list of the sprites that can appear on the cards                                                        |
+
 <br><img src = "docs/images/gamemanager.png" alt = "gamemanager img"></img><br>
+
+**Card Prefab**
+The card prefab is how look the cards that will be created on the game.
+They have the UICard script that have some important references.
+
+| Variable       | Utility                                                                              |
+| -------------- | ------------------------------------------------------------------------------------ |
+| Btn Card       | Reference to the button to set the action by scripting                               |
+| Image          | Reference to the card image to change between the hide and show sprite               |
+| Id             | This value will be automatically set by the gamemanager when the creating the matrix |
+| Hidden Sprite  | This sprite will be shown when the card is 'hidden'                                  |
+| Showing Sprite | This sprite will be shown when the card is 'Showing'                                 |
+
+<br><img src = "docs/images/cardprefab.png" alt = "gamemanager img"></img><br>
+
+**Row Prefab**
+The row prefab is like a parent with the "Horizontal layout group" component to order the cards that will be created.
 
 **NPCCreator**
 The NPCCreator have his own documentation in de Zepeto Docs, there is a link to check it! https://docs.zepeto.me/studio-world/docs/creating-and-controlling-npc
@@ -56,6 +75,7 @@ The NPCCreator have his own documentation in de Zepeto Docs, there is a link to 
 The IconInteraction like the NPCCreator have his own docs here: 
 https://docs.zepeto.me/studio-world/docs/interacting-with-an-object#step-2--setting-the-object
 If you want to change the icon that appears over the npc you have to change the PrefIconCanvas prefab
+<br><img src = "docs/images/IconInteractionPrefab.png" alt = "Icon Interaction Canvas img"></img><br>
 <br><img src = "docs/images/IconInteractionCanvas.png" alt = "Icon Interaction Canvas img"></img><br>
 
 
