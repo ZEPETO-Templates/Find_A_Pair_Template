@@ -1,5 +1,5 @@
 
-# Runner-Template
+# Find a pair game
 
 ## 📢 About
 
