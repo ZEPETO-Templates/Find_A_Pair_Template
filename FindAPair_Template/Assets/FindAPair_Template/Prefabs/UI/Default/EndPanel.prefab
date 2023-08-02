@@ -327,7 +327,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Toltal tries
+  m_Text: Total tries
   customFont: {fileID: 0}
   m_HorizontalFit: 0
   m_VerticalFit: 0
