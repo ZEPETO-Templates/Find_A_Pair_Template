@@ -46,7 +46,6 @@ The GameManager shows a lot of info.
 | Table Parent   | This variable have the parent of the matrix, where it will be created                                       |
 | Row Prefab     | A reference to the row prefab                                                                               |
 | Card Prefab    | A reference to the card prefab                                                                              |
-| Use thumbnails | This checkbox is to select if you want to use the thumbnails of your followers or the sprites that you want |
 | Sprites        | The list of the sprites that can appear on the cards                                                        |
 
 <br><img src = "docs/images/gamemanager.png" alt = "gamemanager img"></img><br>
@@ -69,7 +68,7 @@ They have the UICard script that have some important references.
 The row prefab is like a parent with the "Horizontal layout group" component to order the cards that will be created.
 
 **NPCCreator**
-The NPCCreator have his own documentation in de Zepeto Docs, there is a link to check it! https://docs.zepeto.me/studio-world/docs/creating-and-controlling-npc
+The NPCCreator has its own documentation in ZEPETO docs, here is the link to check it out! https://docs.zepeto.me/studio-world/docs/creating-and-controlling-npc
 
 **IconInteraction**
 The IconInteraction like the NPCCreator have his own docs here: 

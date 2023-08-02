@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { Camera, Canvas, Collider, GameObject, Transform, Object, Vector3 } from 'UnityEngine';
 import { Button } from 'UnityEngine.UI';
 import UIManager, { UIPanel } from './Managers/UIManager';
-import { UIZepetoPlayerControl, ZepetoPlayers } from 'ZEPETO.Character.Controller';
+import { ZepetoPlayers } from 'ZEPETO.Character.Controller';
 
 // This class is responsible for creating a floating icon upon which, when clicked, it will execute the game.
 export default class IconInteraction extends ZepetoScriptBehaviour {
@@ -19,17 +19,8 @@ export default class IconInteraction extends ZepetoScriptBehaviour {
     private _isIconActive: boolean = false; // Variable to know if the icon is active or not
     private _isDoneFirstTrig: boolean = false; // Flag to control the first trigger
 
-    private controlUI: UIZepetoPlayerControl; // Reference to the UIZepetoPlayerControl to restrict the use when you are in the game
 
     // Update function called every frame
-    Start () {
-        // When the player is instantiated execute the lines below
-        ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener( () => {
-            // Find a object with the type of UIZepetoPlayerControl and set it on the variable
-            this.controlUI = GameObject.FindObjectOfType<UIZepetoPlayerControl>();
-        } );
-
-    }
     private Update () {
         // Check if the first trigger is done and the canvas is active
         if ( this._isDoneFirstTrig && this._canvas?.gameObject.activeSelf )
@@ -128,16 +119,7 @@ export default class IconInteraction extends ZepetoScriptBehaviour {
         this.HideIcon();
 
         // Call to the function ControlPlayer
-        this.ControlPlayer( false );
+        UIManager.instance.ControlPlayer( false );
     }
 
-    // This function active or deactive the control of the player
-    private ControlPlayer ( activePlayer: bool ) {
-        // If the controlUI is not null, deactivate the object
-        this.controlUI?.gameObject.SetActive( activePlayer );
-
-        // Check if the player have to be active and set the camera sensitivity on 5 or 0 
-        if ( activePlayer ) ZepetoPlayers.instance.cameraData.sensitivity = 5;
-        else ZepetoPlayers.instance.cameraData.sensitivity = 0;
-    }
 }

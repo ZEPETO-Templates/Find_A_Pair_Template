@@ -1,31 +1,26 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script';
 import { ZepetoWorldHelper } from 'ZEPETO.World';
-import { Texture, Texture2D, Sprite, Rect, Vector2, SerializeReference, Debug } from 'UnityEngine';
-import { Image } from 'UnityEngine.UI';
+import { Texture, Texture2D, Sprite, Rect, Vector2 } from 'UnityEngine';
 import { ZepetoPlayers } from 'ZEPETO.Character.Controller';
-import { MyFollowingListResponse } from 'ZEPETO.Module.Social';
-import { BaseResponse } from 'ZEPETO.Module';
+import { SocialService } from 'ZEPETO.Module.Social';
 
 // WORK IN PROGRESS -------------
 // This class will be the Thumbnail generator for the cards based on the friend list
 export default class ThumbnailsCreator extends ZepetoScriptBehaviour {
+    public userSprites: Sprite[];
 
-    public userId: string;
-    public sampleImage: Image;
+    Start () {
+        
+    }
 
-    public Setup ( id: string = null ) {
-        this.userId = id ? id : ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.userId;
-
-        ZepetoWorldHelper.GetProfileTexture( this.userId, ( texture: Texture ) => {
-            this.sampleImage.sprite = this.GetSprite( texture );
-
+    public GetUserSprite ( id: string = null ): Sprite {
+        ZepetoWorldHelper.GetProfileTexture( id, ( texture: Texture ) => {
+            let userSprite = this.GetSprite( texture );
+            return userSprite;
         }, ( error ) => {
             console.log( error );
         } );
-    }
-
-    Start () {
-        this.GetFriendList();
+        return null;
     }
 
     GetSprite ( texture: Texture ) {
@@ -33,7 +28,6 @@ export default class ThumbnailsCreator extends ZepetoScriptBehaviour {
         return Sprite.Create( texture as Texture2D, rect, new Vector2( 0.5, 0.5 ) );
     }
 
-    GetFriendList () {
-
+    *GetFriendList () {
     }
 }

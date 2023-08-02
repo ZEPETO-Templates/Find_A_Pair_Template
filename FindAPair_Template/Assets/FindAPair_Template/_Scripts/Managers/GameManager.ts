@@ -17,7 +17,7 @@ export default class GameManager extends ZepetoScriptBehaviour {
     @SerializeField() cardPrefab: GameObject; // Reference to the card prefab
 
     @Header( "Card images" )
-    @SerializeField() useThumbnails: bool; // This variable will set if the user wants to show thmbnails or his own images of the "sprites" variable
+    // @SerializeField() useThumbnails: bool; // This variable will set if the user wants to show thmbnails or his own images of the "sprites" variable
     @SerializeField() sprites: Sprite[]; // This sprites will be used if the "useThumbnails" bool is false
 
     private selections: UICard[]; // This variables saves the selections of the player
@@ -31,8 +31,10 @@ export default class GameManager extends ZepetoScriptBehaviour {
     SetPairAmount ( amount: number ) {
         // Set the pair amount on his variable
         this.pairAmount = amount;
+
         // Call to the function to destroy the actual matrix
         this.MatrixDestruction();
+
         // Call to the function to create a new matrix
         this.MatrixCreation();
     }
@@ -57,12 +59,13 @@ export default class GameManager extends ZepetoScriptBehaviour {
     Start () {
         // Call to the function to create the base cards that can be created on a game
         this.CardsCreation();
-        // Call to the function to create a new matrix
-        this.MatrixCreation();
     }
 
     // This function create a card for each sprite saved on the variable "sprites"
     CardsCreation () {
+        // First we clear the cards created or saved in the cards map
+        this.cards.clear();
+
         // First we create a counter
         let counter: number = 0;
 
@@ -79,13 +82,16 @@ export default class GameManager extends ZepetoScriptBehaviour {
     ResetMatrix () {
         // First get all the UICards that are children of the tableParent
         const cards = this.tableParent.GetComponentsInChildren<UICard>( true );
+
         // Then foreach card
         cards.forEach( card => {
             // Call the function SetFoundedCard and send false to reset the card
             card.SetFoundedCard( false );
         } );
+
         // Call to the function ShuffleMatrix
         this.ShuffleMatrix();
+
         // And reset the variables of the game to 0
         this.pairsFounded = 0;
         this.tries = 0;
@@ -118,6 +124,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
         // And set a cardId to start
         let cardId = 0;
 
+        // Create an array to save the cards that will be created
+        let cardScriptList = [];
+
         // While we have cards to create
         while ( cardsToCreate > 0 )
         {
@@ -137,6 +146,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
             let newCard = GameObject.Instantiate( this.cardPrefab, rowParent ) as GameObject;
             // Then save the card script(UICard) into a variable
             let newCardScript = newCard.GetComponent<UICard>();
+
+            // Save the script in the array to shuffle it later
+            cardScriptList.push( newCardScript );
 
             // Check if the number of cards is even, and if it's not the first card, then add 1 to the variable "cardId"
             if ( ( cardsToCreate % 2 ) == 0 && cardsToCreate != this.pairAmount * 2 ) cardId++;
@@ -159,48 +171,42 @@ export default class GameManager extends ZepetoScriptBehaviour {
         UIManager.instance.UpdatePairsFounded( this.pairsFounded, this.pairAmount );
 
         // Then Suffle the matrix to start the game
-        this.ShuffleMatrix();
+        this.ShuffleMatrix( cardScriptList );
     }
 
     // This function shuffles the matrix to randomize the pairs
-    ShuffleMatrix () {
-        // Get the cards from the tableparent childs
-        const cards = this.tableParent.GetComponentsInChildren<UICard>( true );
-        // Set the card count on the cards obtained lenght
-        const cardCount = cards.length;
+    ShuffleMatrix ( cards: UICard[] = null ) {
+        // If not receive the array of cards then get the cards from the tableparent childs
+        if ( cards == null ) cards = this.tableParent.GetComponentsInChildren<UICard>( true );
 
-        // Get a list of index for the cards
-        const index = new List$1<number>();
-        for ( let i = 0; i < cardCount; i++ )
+        // Randomly shuffle the indexes
+        for ( let i = 0; i < cards.length; i++ )
         {
-            index.Add( i );
+            // First we save the actual card data in variables
+            let actualCardId = cards[ i ].id;
+            let actualCardSprite = cards[ i ].showingSprite;
+
+            // We create a random number to select another card to swap
+            let randomCard = Random.Range( 0, cards.length - 1 );
+            // If the result is a float number, we change it to int
+            randomCard = Mathf.FloorToInt( randomCard );
+
+            // Then we save the data of the random card in other variables
+            let randomCardId = cards[ randomCard ].id;
+            let randomCardSprite = cards[ randomCard ].showingSprite;
+
+            // Then we swap the values of the actual card
+            cards[ i ].id = randomCardId;
+            cards[ i ].showingSprite = randomCardSprite;
+
+            // With the values of the random card
+            cards[ randomCard ].id = actualCardId;
+            cards[ randomCard ].showingSprite = actualCardSprite;
         }
 
-        // Randomly shuffle the indices.
-        for ( let i = 0; i < cardCount; i++ )
-        {
-            // Create a randomIndex between 0 and the index count
-            const randomIndex = Random.Range( 0, index.Count );
-            // Create a current indes with the actual index
-            const currentIndex = index[ i ];
-            // Create a random swap with them
-            const randomSwapIndex = index[ randomIndex ];
-
-            // Swap the sprites and IDs between the cards
-            // Create a temporal sprite with the sprite of the card with the current index
-            const tempSprite = cards[ currentIndex ].showingSprite;
-            // Create a temporal id with the card of the current index     
-            const tempId = cards[ currentIndex ].id;
-
-            // Then swap the cards
-            // The card with the current index gets the card with the randomSwapIndex
-            cards[ currentIndex ].showingSprite = cards[ randomSwapIndex ].showingSprite;
-            cards[ currentIndex ].id = cards[ randomSwapIndex ].id;
-
-            // And the card with the random swap gets the temporal variables that we create before
-            cards[ randomSwapIndex ].showingSprite = tempSprite;
-            cards[ randomSwapIndex ].id = tempId;
-        }
+        cards.forEach( card => {
+            card.ShowCard( true );
+        } );
     }
 
     // This function creates a row in the table parent with the row prefab

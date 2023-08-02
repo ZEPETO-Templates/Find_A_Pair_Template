@@ -1,21 +1,20 @@
 import { Sprite } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
-import { RoundedRectangle } from 'ZEPETO.World.Gui'
 import GameManager from './Managers/GameManager';
-import { Button } from 'UnityEngine.UI';
+import { Button, Image } from 'UnityEngine.UI';
 
 // This class contains the Cards that are showed in the game
 export default class UICard extends ZepetoScriptBehaviour {
     @SerializeField() btnCard: Button; // Reference to the card button
 
-    public image: RoundedRectangle; // Reference to the image of the card
+    public image: Image; // Reference to the image of the card
     public id: number; // This variables will be used to compare the card with others
     public hiddenSprite: Sprite; // This will be the sprite that will be showed when the card is hidden
     public showingSprite: Sprite; // This will be the sprite that will be showed when the card is showing
 
     private founded: bool; // flag to know if the card was founded with his pair
     private showing: bool; // flag to know if the card is showing his image
-    
+
     // Start is called on the frame when a script is enabled just before any of the Update methods are called the first time
     Start () {
         // Set the btnCard action
@@ -29,10 +28,10 @@ export default class UICard extends ZepetoScriptBehaviour {
     OnClickCard () {
         // Check if the two flags are false, if not stop the process
         if ( this.founded || this.showing ) return;
-        
+
         // Call to the function show card
-        this.ShowCard(true);
-        
+        this.ShowCard( true );
+
         // Call to the SelectCard function of the GameManager
         GameManager.instance.SelectCard( this );
     }
@@ -45,13 +44,15 @@ export default class UICard extends ZepetoScriptBehaviour {
         // Check if the parameter is true to show the card or false to hide the card
         if ( show )
         {
+            this.image.gameObject.SetActive( true );
             // Set the icon of the image on the showing sprite
-            this.image.Icon = this.showingSprite;
+            this.image.sprite = this.showingSprite;
         }
         else
         {
+            this.image.gameObject.SetActive( false );
             // Set the icon of the image on the hidden sprite
-            this.image.Icon = this.hiddenSprite;
+            this.image.sprite = this.hiddenSprite;
         }
     }
 

@@ -20,18 +20,16 @@ ScriptedImporter:
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
-    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\n//
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\n//
     WORK IN PROGRESS -------------\r\n// This class will be the Thumbnail generator
     for the cards based on the friend list\r\nclass ThumbnailsCreator extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    Setup(id = null) {\r\n        this.userId = id ? id : ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.userId;\r\n       
-    ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(this.userId, (texture) =>
-    {\r\n            this.sampleImage.sprite = this.GetSprite(texture);\r\n       
-    }, (error) => {\r\n            console.log(error);\r\n        });\r\n    }\r\n   
-    Start() {\r\n        this.GetFriendList();\r\n    }\r\n    GetSprite(texture)
-    {\r\n        let rect = new UnityEngine_1.Rect(0, 0, texture.width, texture.height);\r\n       
+    {\r\n    Start() {\r\n    }\r\n    GetUserSprite(id = null) {\r\n        ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(id,
+    (texture) => {\r\n            let userSprite = this.GetSprite(texture);\r\n           
+    return userSprite;\r\n        }, (error) => {\r\n            console.log(error);\r\n       
+    });\r\n        return null;\r\n    }\r\n    GetSprite(texture) {\r\n        let
+    rect = new UnityEngine_1.Rect(0, 0, texture.width, texture.height);\r\n       
     return UnityEngine_1.Sprite.Create(texture, rect, new UnityEngine_1.Vector2(0.5,
-    0.5));\r\n    }\r\n    GetFriendList() {\r\n    }\r\n}\r\nexports.default = ThumbnailsCreator;\r\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsc0NyZWF0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaHVtYm5haWxzQ3JlYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCwrQ0FBaUQ7QUFDakQsNkNBQW1HO0FBRW5HLDZFQUE0RDtBQUk1RCxpQ0FBaUM7QUFDakMsb0ZBQW9GO0FBQ3BGLE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQUt6RCxLQUFLLENBQUcsS0FBYSxJQUFJO1FBQzVCLElBQUksQ0FBQyxNQUFNLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsTUFBTSxDQUFDO1FBRS9FLGdDQUFpQixDQUFDLGlCQUFpQixDQUFFLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBRSxPQUFnQixFQUFHLEVBQUU7WUFDckUsSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBRSxPQUFPLENBQUUsQ0FBQztRQUV4RCxDQUFDLEVBQUUsQ0FBRSxLQUFLLEVBQUcsRUFBRTtZQUNYLE9BQU8sQ0FBQyxHQUFHLENBQUUsS0FBSyxDQUFFLENBQUM7UUFDekIsQ0FBQyxDQUFFLENBQUM7SUFDUixDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztJQUN6QixDQUFDO0lBRUQsU0FBUyxDQUFHLE9BQWdCO1FBQ3hCLElBQUksSUFBSSxHQUFTLElBQUksa0JBQUksQ0FBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLE9BQU8sQ0FBQyxLQUFLLEVBQUUsT0FBTyxDQUFDLE1BQU0sQ0FBRSxDQUFDO1FBQ2pFLE9BQU8sb0JBQU0sQ0FBQyxNQUFNLENBQUUsT0FBb0IsRUFBRSxJQUFJLEVBQUUsSUFBSSxxQkFBTyxDQUFFLEdBQUcsRUFBRSxHQUFHLENBQUUsQ0FBRSxDQUFDO0lBQ2hGLENBQUM7SUFFRCxhQUFhO0lBRWIsQ0FBQztDQUNKO0FBNUJELG9DQTRCQyJ9","assetPath":"Assets/MainProject/_Scripts/ThumbnailsCreator.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"userId","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"sampleImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ThumbnailsCreator","description":"","hasAnimatorMove":false},"isCompiled":true}'
-  typescriptHash: d6d2a51aa59f30aeee60a1a0de1dc10e
+    0.5));\r\n    }\r\n    *GetFriendList() {\r\n    }\r\n}\r\nexports.default =
+    ThumbnailsCreator;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsc0NyZWF0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaHVtYm5haWxzQ3JlYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCwrQ0FBaUQ7QUFDakQsNkNBQXdFO0FBSXhFLGlDQUFpQztBQUNqQyxvRkFBb0Y7QUFDcEYsTUFBcUIsaUJBQWtCLFNBQVEscUNBQXFCO0lBR2hFLEtBQUs7SUFFTCxDQUFDO0lBRU0sYUFBYSxDQUFHLEtBQWEsSUFBSTtRQUNwQyxnQ0FBaUIsQ0FBQyxpQkFBaUIsQ0FBRSxFQUFFLEVBQUUsQ0FBRSxPQUFnQixFQUFHLEVBQUU7WUFDNUQsSUFBSSxVQUFVLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBRSxPQUFPLENBQUUsQ0FBQztZQUMzQyxPQUFPLFVBQVUsQ0FBQztRQUN0QixDQUFDLEVBQUUsQ0FBRSxLQUFLLEVBQUcsRUFBRTtZQUNYLE9BQU8sQ0FBQyxHQUFHLENBQUUsS0FBSyxDQUFFLENBQUM7UUFDekIsQ0FBQyxDQUFFLENBQUM7UUFDSixPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsU0FBUyxDQUFHLE9BQWdCO1FBQ3hCLElBQUksSUFBSSxHQUFTLElBQUksa0JBQUksQ0FBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLE9BQU8sQ0FBQyxLQUFLLEVBQUUsT0FBTyxDQUFDLE1BQU0sQ0FBRSxDQUFDO1FBQ2pFLE9BQU8sb0JBQU0sQ0FBQyxNQUFNLENBQUUsT0FBb0IsRUFBRSxJQUFJLEVBQUUsSUFBSSxxQkFBTyxDQUFFLEdBQUcsRUFBRSxHQUFHLENBQUUsQ0FBRSxDQUFDO0lBQ2hGLENBQUM7SUFFRCxDQUFDLGFBQWE7SUFDZCxDQUFDO0NBQ0o7QUF4QkQsb0NBd0JDIn0=","assetPath":"Assets/FindAPair_Template/_Scripts/ThumbnailsCreator.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"userSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ThumbnailsCreator","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: e34dbdf64c8f2c3d6b3896e36b6d527f
   onlyWriteTrigger: 0

@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3342043563519232176, guid: af604c66e93788242af4350d4849e0b1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8494497647281897174, guid: af604c66e93788242af4350d4849e0b1, type: 3}
       propertyPath: m_Name
       value: FindAPair_Game

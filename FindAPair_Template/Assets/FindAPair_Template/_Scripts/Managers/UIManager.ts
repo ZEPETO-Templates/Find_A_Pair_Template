@@ -3,6 +3,7 @@ import { GameObject, WaitForSeconds } from 'UnityEngine';
 import { RoundedRectangleButton, ZepetoText } from 'ZEPETO.World.Gui';
 import GameManager from './GameManager';
 import { InputField } from 'UnityEngine.UI';
+import { UIZepetoPlayerControl, ZepetoPlayers } from 'ZEPETO.Character.Controller';
 
 export enum UIPanel {
     Start, Game, End, None
@@ -36,6 +37,8 @@ export default class UIManager extends ZepetoScriptBehaviour {
 
     private pairs: number = 6; // This variable save amount of pairs defined on the pairsInput
 
+    private controlUI: UIZepetoPlayerControl; // Reference to the UIZepetoPlayerControl to restrict the use when you are in the game
+
     // Awake is called when an enabled script instance is being loaded.
     Awake () {
         // Singleton pattern
@@ -45,6 +48,12 @@ export default class UIManager extends ZepetoScriptBehaviour {
 
     // Start is called on the frame when a script is enabled just before any of the Update methods are called the first time
     Start () {
+        // When the player is instantiated execute the lines below
+        ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener( () => {
+            // Find a object with the type of UIZepetoPlayerControl and set it on the variable
+            this.controlUI = GameObject.FindObjectOfType<UIZepetoPlayerControl>();
+        } );
+
         // Call to the function InitButtonsListeners
         this.InitButtonsListeners();
     }
@@ -169,6 +178,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
             default:
                 // Deactivate the exit buttton to close the game
                 this.exitBtn.gameObject.SetActive( false );
+                this.ControlPlayer( true );
                 break;
         }
     }
@@ -189,5 +199,15 @@ export default class UIManager extends ZepetoScriptBehaviour {
     public UpdateTotalTries ( tries: number ) {
         // Updated the totalTries text with the parameter
         this.totalTries.text = tries.toString();
+    }
+
+    // This function active or deactive the control of the player
+    public ControlPlayer ( activePlayer: bool ) {
+        // If the controlUI is not null, deactivate the object
+        this.controlUI?.gameObject.SetActive( activePlayer );
+
+        // Check if the player have to be active and set the camera sensitivity on 5 or 0 
+        if ( activePlayer ) ZepetoPlayers.instance.cameraData.sensitivity = 5;
+        else ZepetoPlayers.instance.cameraData.sensitivity = 0;
     }
 }
