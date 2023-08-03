@@ -204,9 +204,9 @@ export default class GameManager extends ZepetoScriptBehaviour {
             cards[ randomCard ].showingSprite = actualCardSprite;
         }
 
-        cards.forEach( card => {
-            card.ShowCard( true );
-        } );
+        // cards.forEach( card => {
+        //     card.ShowCard( true );
+        // } );
     }
 
     // This function creates a row in the table parent with the row prefab
