@@ -7,31 +7,50 @@ import { SocialService } from 'ZEPETO.Module.Social';
 // WORK IN PROGRESS -------------
 // This class will be the Thumbnail generator for the cards based on the friend list
 export default class ThumbnailsCreator extends ZepetoScriptBehaviour {
-    public userSprites: Sprite[];
+    public userSprites: Sprite[]; // This variable will save the sprites of the follows of the user
+    private usersIds: string[]; // This variable saves the userIds of the follows of the user
 
-    private usersIds: string[];
+    // Start is called on the frame when a script is enabled just before any of the Update methods are called the first time
     Start () {
+        // Initialize the arrays
         this.usersIds = [];
         this.userSprites = [];
-        this.StartCoroutine( this.GetFriendList() );
+
+        // Call to the coroutine to get the sprites of the follows
+        this.StartCoroutine( this.CreateFollowingSprites() );
     }
 
-    public GetUserSprite ( id: string = null ): Sprite {
+    // This function creates the sprite of the user passed by parameter and returns it
+    GetUserSprite ( id: string = null ): Sprite {
+        // Here we use the ZepetoWorldHelper to get a texture from the user id https://docs.zepeto.me/studio-world/docs/user_information
         ZepetoWorldHelper.GetProfileTexture( id, ( texture: Texture ) => {
+            // We save the sprite getting it from the GetSprite function
             let userSprite = this.GetSprite( texture );
+            // Then push the sprite to the userSprites array
+            this.userSprites.push( userSprite );
+            // And return it
             return userSprite;
+
+            // If you get an error
         }, ( error ) => {
+            // Then log the error on the console
             console.log( error );
         } );
+        // And return null when you got an error
         return null;
     }
 
-    GetSprite ( texture: Texture ) {
+    // This function create and return an sprite receiving a texture as parameter
+    GetSprite ( texture: Texture ): Sprite {
+        // Save the Rect creating it by the size of the texture
         let rect: Rect = new Rect( 0, 0, texture.width, texture.height );
+        // Then return the creation of the sprite based on the texture
         return Sprite.Create( texture as Texture2D, rect, new Vector2( 0.5, 0.5 ) );
     }
 
-    *GetFriendList () {
+    // This function send a request to get the following list of the user
+    *CreateFollowingSprites () {
+        //
         var request = SocialService.GetMyFollowingListAsync();
 
         yield new WaitUntil( () => false == request.keepWaiting );
@@ -44,7 +63,7 @@ export default class ThumbnailsCreator extends ZepetoScriptBehaviour {
             } );
 
             this.usersIds.forEach( id => {
-                this.userSprites.push( this.GetUserSprite( id ) );
+                this.GetUserSprite( id );
             } );
         } else
         {
