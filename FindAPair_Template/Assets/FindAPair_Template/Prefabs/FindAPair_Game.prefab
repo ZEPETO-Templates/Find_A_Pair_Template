@@ -226,32 +226,29 @@ MonoBehaviour:
     - {fileID: 6689074789726875597, guid: ba04f7285ad383949a0bb55ef49ed3c9, type: 3}
     values:
     - '{"type":"System.Single, mscorlib","value":"6"}'
-    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":19,\"type\":\"UnityEngine.Object,
+    - '{"type":"ZEPETO.Script.ZepetoScriptSerializer+ArrayInfo, ZEPETO.Script","value":"{\"offset\":0,\"length\":16,\"type\":\"UnityEngine.Object,
       UnityEngine.CoreModule\",\"isUnity\":true}"}'
     - '{"type":"System.Single, mscorlib","value":"0"}'
     - 
     - 
     - 
     unityArrayValues:
-    - {fileID: 21300000, guid: 23e38139d799d4b46bf18983c5cd69e5, type: 3}
-    - {fileID: 21300000, guid: 44ff823bdce272e43a05dc97e95445e6, type: 3}
-    - {fileID: 21300000, guid: d0e711cb419d43445941a5c13c7e1972, type: 3}
-    - {fileID: 21300000, guid: 1d0df5ccd4d7255428c92a53b1bb27c7, type: 3}
-    - {fileID: 21300000, guid: 8dd7167ccfae45e40ac8cbf086e8f883, type: 3}
-    - {fileID: 21300000, guid: b1e0dfd799bdc264c88ea6590bd9fd30, type: 3}
-    - {fileID: 21300000, guid: a5dd85030182f064a8746ec4bbe23bd7, type: 3}
-    - {fileID: 21300000, guid: 1264b0f01e42d8344ad8be0420c7557e, type: 3}
-    - {fileID: 21300000, guid: fc19361a962291d419363fc61f5d9769, type: 3}
-    - {fileID: 21300000, guid: d83c9bc975cb03c47992d073315e0953, type: 3}
-    - {fileID: 21300000, guid: 6e2902fd6e9dd844b89517601e003f97, type: 3}
-    - {fileID: 21300000, guid: 294a420725c135a4d937fe91ba8c1e33, type: 3}
-    - {fileID: 21300000, guid: 1ecb5a0825e113146becea379925de5c, type: 3}
-    - {fileID: 21300000, guid: eccd5f5f86bc70b4783fc8d82f02c7e3, type: 3}
-    - {fileID: 21300000, guid: a84367a7d9f093f4d99ce37c37da9ccf, type: 3}
-    - {fileID: 21300000, guid: c694caf9286db7149a99b047de3ccc1f, type: 3}
-    - {fileID: 21300000, guid: f0ee94b3505b8ed4b86b09d8af2c99d7, type: 3}
-    - {fileID: 21300000, guid: b3f619ea60f513e40a49a356d1c9b9b4, type: 3}
-    - {fileID: 21300000, guid: 24e9c0e0e1b2b1b48b184cb4db075c85, type: 3}
+    - {fileID: 21300000, guid: b0e63aee11a8e99409ffca0355031823, type: 3}
+    - {fileID: 21300000, guid: 7e073b14076a2624f97bb8e88e0054a8, type: 3}
+    - {fileID: 21300000, guid: 466cdcfc3bbc08d4990953ac3d41f3db, type: 3}
+    - {fileID: 21300000, guid: cc5debf1859c6eb40a739c6a411e9cc2, type: 3}
+    - {fileID: 21300000, guid: 61bf41b3ca764a749ad257980b8449fa, type: 3}
+    - {fileID: 21300000, guid: 779dbfc984073af4fa763818892f05a6, type: 3}
+    - {fileID: 21300000, guid: b84d85c23ca60cd4684267c6502875d1, type: 3}
+    - {fileID: 21300000, guid: af7adfa23580e5142b6d73166d88e185, type: 3}
+    - {fileID: 21300000, guid: 7260109b72b396647a7413ff93fac450, type: 3}
+    - {fileID: 21300000, guid: e274ff435348cac45a2cfac9b506e4bb, type: 3}
+    - {fileID: 21300000, guid: df6f790064a08fa47b975647efd10f28, type: 3}
+    - {fileID: 21300000, guid: 3fbb763d50f29f242a1a2e164e455fca, type: 3}
+    - {fileID: 21300000, guid: 183575ac9f2506641a0863d2d7d7877d, type: 3}
+    - {fileID: 21300000, guid: 1cd192b8719aa554889c355af12bd2db, type: 3}
+    - {fileID: 21300000, guid: 31dde0855cc888642ba6ce704a214c39, type: 3}
+    - {fileID: 21300000, guid: 983d36e57a77e3341b4fd431198abe24, type: 3}
     arrayValues: []
     script: {fileID: 4458252877524076426, guid: 973fbf2751fb4654cb5d2f8acdb422a6, type: 3}
     isExpaned: 0
@@ -1011,7 +1008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3737337401081965818, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -1920
       objectReference: {fileID: 0}
     - target: {fileID: 7055856205405129139, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1032,6 +1029,10 @@ PrefabInstance:
     - target: {fileID: 7520561541122459845, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
       propertyPath: m_Name
       value: GamePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520561541122459845, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7520561541122459850, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
       propertyPath: m_Pivot.x

@@ -84,6 +84,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
         this.rematchBtn.OnClick.AddListener( () => {
             // Call to the function ShowPanel to show the Game panel
             this.ShowPanel( UIPanel.Game );
+            this.UpdatePairsFounded( 0, GameManager.instance.pairAmount );
         } );
 
         // Set the behaviour of the exit button

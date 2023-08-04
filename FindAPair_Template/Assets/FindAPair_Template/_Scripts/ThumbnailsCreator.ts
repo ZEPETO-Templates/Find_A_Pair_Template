@@ -4,7 +4,7 @@ import { Texture, Texture2D, Sprite, Rect, Vector2, WaitUntil } from 'UnityEngin
 import { ZepetoPlayers } from 'ZEPETO.Character.Controller';
 import { SocialService } from 'ZEPETO.Module.Social';
 
-// WORK IN PROGRESS -------------
+// You can use this class to use thumbnails of your followings in the game
 // This class will be the Thumbnail generator for the cards based on the friend list
 export default class ThumbnailsCreator extends ZepetoScriptBehaviour {
     public userSprites: Sprite[]; // This variable will save the sprites of the follows of the user
@@ -48,23 +48,26 @@ export default class ThumbnailsCreator extends ZepetoScriptBehaviour {
         return Sprite.Create( texture as Texture2D, rect, new Vector2( 0.5, 0.5 ) );
     }
 
-    // This function send a request to get the following list of the user
+    // This function send a request to get the following list of the user and create the sprites with them
     *CreateFollowingSprites () {
-        //
+        // There we make a request to get the following list
         var request = SocialService.GetMyFollowingListAsync();
 
+        // We wait until the request finish 
         yield new WaitUntil( () => false == request.keepWaiting );
 
+        // Then if the request is succsess
         if ( request.responseData.isSuccess )
         {
+            // We save the list of the users on the variable
             var userList = request.responseData.users;
+
+            // Then we get a sprite for each userid
             userList.forEach( user => {
-                this.usersIds.push( user.userId );
+                // Call to the function to create the sprite passing the userId
+                this.GetUserSprite( user.userId );
             } );
 
-            this.usersIds.forEach( id => {
-                this.GetUserSprite( id );
-            } );
         } else
         {
             // If the request fails, print the error message.

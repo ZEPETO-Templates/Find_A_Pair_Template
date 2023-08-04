@@ -21,17 +21,17 @@ ScriptedImporter:
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
     { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
     ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
-    ZEPETO_Module_Social_1 = require(\"ZEPETO.Module.Social\");\r\n// WORK IN PROGRESS
-    -------------\r\n// This class will be the Thumbnail generator for the cards
-    based on the friend list\r\nclass ThumbnailsCreator extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    // Start is called on the frame when a script is enabled just before
-    any of the Update methods are called the first time\r\n    Start() {\r\n       
-    // Initialize the arrays\r\n        this.usersIds = [];\r\n        this.userSprites
-    = [];\r\n        // Call to the coroutine to get the sprites of the follows\r\n       
-    this.StartCoroutine(this.CreateFollowingSprites());\r\n    }\r\n    // This function
-    creates the sprite of the user passed by parameter and returns it\r\n    GetUserSprite(id
-    = null) {\r\n        // Here we use the ZepetoWorldHelper to get a texture from
-    the user id https://docs.zepeto.me/studio-world/docs/user_information\r\n       
+    ZEPETO_Module_Social_1 = require(\"ZEPETO.Module.Social\");\r\n// You can use
+    this class to use thumbnails of your followings in the game\r\n// This class
+    will be the Thumbnail generator for the cards based on the friend list\r\nclass
+    ThumbnailsCreator extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    // Start
+    is called on the frame when a script is enabled just before any of the Update
+    methods are called the first time\r\n    Start() {\r\n        // Initialize the
+    arrays\r\n        this.usersIds = [];\r\n        this.userSprites = [];\r\n       
+    // Call to the coroutine to get the sprites of the follows\r\n        this.StartCoroutine(this.CreateFollowingSprites());\r\n   
+    }\r\n    // This function creates the sprite of the user passed by parameter
+    and returns it\r\n    GetUserSprite(id = null) {\r\n        // Here we use the
+    ZepetoWorldHelper to get a texture from the user id https://docs.zepeto.me/studio-world/docs/user_information\r\n       
     ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(id, (texture) => {\r\n           
     // We save the sprite getting it from the GetSprite function\r\n            let
     userSprite = this.GetSprite(texture);\r\n            // Then push the sprite
@@ -45,14 +45,19 @@ ScriptedImporter:
     let rect = new UnityEngine_1.Rect(0, 0, texture.width, texture.height);\r\n       
     // Then return the creation of the sprite based on the texture\r\n        return
     UnityEngine_1.Sprite.Create(texture, rect, new UnityEngine_1.Vector2(0.5, 0.5));\r\n   
-    }\r\n    // This function send a request to get the following list of the user\r\n   
-    *CreateFollowingSprites() {\r\n        //\r\n        var request = ZEPETO_Module_Social_1.SocialService.GetMyFollowingListAsync();\r\n       
-    yield new UnityEngine_1.WaitUntil(() => false == request.keepWaiting);\r\n       
-    if (request.responseData.isSuccess) {\r\n            var userList = request.responseData.users;\r\n           
-    userList.forEach(user => {\r\n                this.usersIds.push(user.userId);\r\n           
-    });\r\n            this.usersIds.forEach(id => {\r\n                this.GetUserSprite(id);\r\n           
+    }\r\n    // This function send a request to get the following list of the user
+    and create the sprites with them\r\n    *CreateFollowingSprites() {\r\n       
+    // There we make a request to get the following list\r\n        var request =
+    ZEPETO_Module_Social_1.SocialService.GetMyFollowingListAsync();\r\n        //
+    We wait until the request finish \r\n        yield new UnityEngine_1.WaitUntil(()
+    => false == request.keepWaiting);\r\n        // Then if the request is succsess\r\n       
+    if (request.responseData.isSuccess) {\r\n            // We save the list of the
+    users on the variable\r\n            var userList = request.responseData.users;\r\n           
+    // Then we get a sprite for each userid\r\n            userList.forEach(user
+    => {\r\n                // Call to the function to create the sprite passing
+    the userId\r\n                this.GetUserSprite(user.userId);\r\n           
     });\r\n        }\r\n        else {\r\n            // If the request fails, print
     the error message.\r\n            console.log(`GetFollowerList Failed : ${request.responseData.message}`);\r\n       
-    }\r\n    }\r\n}\r\nexports.default = ThumbnailsCreator;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsc0NyZWF0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaHVtYm5haWxzQ3JlYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCwrQ0FBaUQ7QUFDakQsNkNBQW1GO0FBRW5GLCtEQUFxRDtBQUVyRCxpQ0FBaUM7QUFDakMsb0ZBQW9GO0FBQ3BGLE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQUloRSx3SEFBd0g7SUFDeEgsS0FBSztRQUNELHdCQUF3QjtRQUN4QixJQUFJLENBQUMsUUFBUSxHQUFHLEVBQUUsQ0FBQztRQUNuQixJQUFJLENBQUMsV0FBVyxHQUFHLEVBQUUsQ0FBQztRQUV0QiwwREFBMEQ7UUFDMUQsSUFBSSxDQUFDLGNBQWMsQ0FBRSxJQUFJLENBQUMsc0JBQXNCLEVBQUUsQ0FBRSxDQUFDO0lBQ3pELENBQUM7SUFFRCxrRkFBa0Y7SUFDbEYsYUFBYSxDQUFHLEtBQWEsSUFBSTtRQUM3QixnSUFBZ0k7UUFDaEksZ0NBQWlCLENBQUMsaUJBQWlCLENBQUUsRUFBRSxFQUFFLENBQUUsT0FBZ0IsRUFBRyxFQUFFO1lBQzVELDREQUE0RDtZQUM1RCxJQUFJLFVBQVUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFFLE9BQU8sQ0FBRSxDQUFDO1lBQzNDLGdEQUFnRDtZQUNoRCxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBRSxVQUFVLENBQUUsQ0FBQztZQUNwQyxnQkFBZ0I7WUFDaEIsT0FBTyxVQUFVLENBQUM7WUFFbEIsc0JBQXNCO1FBQzFCLENBQUMsRUFBRSxDQUFFLEtBQUssRUFBRyxFQUFFO1lBQ1gsb0NBQW9DO1lBQ3BDLE9BQU8sQ0FBQyxHQUFHLENBQUUsS0FBSyxDQUFFLENBQUM7UUFDekIsQ0FBQyxDQUFFLENBQUM7UUFDSix3Q0FBd0M7UUFDeEMsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELDZFQUE2RTtJQUM3RSxTQUFTLENBQUcsT0FBZ0I7UUFDeEIsdURBQXVEO1FBQ3ZELElBQUksSUFBSSxHQUFTLElBQUksa0JBQUksQ0FBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLE9BQU8sQ0FBQyxLQUFLLEVBQUUsT0FBTyxDQUFDLE1BQU0sQ0FBRSxDQUFDO1FBQ2pFLDhEQUE4RDtRQUM5RCxPQUFPLG9CQUFNLENBQUMsTUFBTSxDQUFFLE9BQW9CLEVBQUUsSUFBSSxFQUFFLElBQUkscUJBQU8sQ0FBRSxHQUFHLEVBQUUsR0FBRyxDQUFFLENBQUUsQ0FBQztJQUNoRixDQUFDO0lBRUQscUVBQXFFO0lBQ3JFLENBQUMsc0JBQXNCO1FBQ25CLEVBQUU7UUFDRixJQUFJLE9BQU8sR0FBRyxvQ0FBYSxDQUFDLHVCQUF1QixFQUFFLENBQUM7UUFFdEQsTUFBTSxJQUFJLHVCQUFTLENBQUUsR0FBRyxFQUFFLENBQUMsS0FBSyxJQUFJLE9BQU8sQ0FBQyxXQUFXLENBQUUsQ0FBQztRQUUxRCxJQUFLLE9BQU8sQ0FBQyxZQUFZLENBQUMsU0FBUyxFQUNuQztZQUNJLElBQUksUUFBUSxHQUFHLE9BQU8sQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDO1lBQzFDLFFBQVEsQ0FBQyxPQUFPLENBQUUsSUFBSSxDQUFDLEVBQUU7Z0JBQ3JCLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFFLElBQUksQ0FBQyxNQUFNLENBQUUsQ0FBQztZQUN0QyxDQUFDLENBQUUsQ0FBQztZQUVKLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFFLEVBQUUsQ0FBQyxFQUFFO2dCQUN4QixJQUFJLENBQUMsYUFBYSxDQUFFLEVBQUUsQ0FBRSxDQUFDO1lBQzdCLENBQUMsQ0FBRSxDQUFDO1NBQ1A7YUFDRDtZQUNJLGlEQUFpRDtZQUNqRCxPQUFPLENBQUMsR0FBRyxDQUFFLDRCQUE2QixPQUFPLENBQUMsWUFBWSxDQUFDLE9BQVEsRUFBRSxDQUFFLENBQUM7U0FDL0U7SUFFTCxDQUFDO0NBQ0o7QUFsRUQsb0NBa0VDIn0=","assetPath":"Assets/FindAPair_Template/_Scripts/ThumbnailsCreator.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"userSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ThumbnailsCreator","description":"","hasAnimatorMove":false},"isCompiled":true}'
-  typescriptHash: 748b5fd95ec46461de8667bd4963b59d
+    }\r\n    }\r\n}\r\nexports.default = ThumbnailsCreator;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGh1bWJuYWlsc0NyZWF0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUaHVtYm5haWxzQ3JlYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFzRDtBQUN0RCwrQ0FBaUQ7QUFDakQsNkNBQW1GO0FBRW5GLCtEQUFxRDtBQUVyRCwwRUFBMEU7QUFDMUUsb0ZBQW9GO0FBQ3BGLE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQUloRSx3SEFBd0g7SUFDeEgsS0FBSztRQUNELHdCQUF3QjtRQUN4QixJQUFJLENBQUMsUUFBUSxHQUFHLEVBQUUsQ0FBQztRQUNuQixJQUFJLENBQUMsV0FBVyxHQUFHLEVBQUUsQ0FBQztRQUV0QiwwREFBMEQ7UUFDMUQsSUFBSSxDQUFDLGNBQWMsQ0FBRSxJQUFJLENBQUMsc0JBQXNCLEVBQUUsQ0FBRSxDQUFDO0lBQ3pELENBQUM7SUFFRCxrRkFBa0Y7SUFDbEYsYUFBYSxDQUFHLEtBQWEsSUFBSTtRQUM3QixnSUFBZ0k7UUFDaEksZ0NBQWlCLENBQUMsaUJBQWlCLENBQUUsRUFBRSxFQUFFLENBQUUsT0FBZ0IsRUFBRyxFQUFFO1lBQzVELDREQUE0RDtZQUM1RCxJQUFJLFVBQVUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFFLE9BQU8sQ0FBRSxDQUFDO1lBQzNDLGdEQUFnRDtZQUNoRCxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBRSxVQUFVLENBQUUsQ0FBQztZQUNwQyxnQkFBZ0I7WUFDaEIsT0FBTyxVQUFVLENBQUM7WUFFbEIsc0JBQXNCO1FBQzFCLENBQUMsRUFBRSxDQUFFLEtBQUssRUFBRyxFQUFFO1lBQ1gsb0NBQW9DO1lBQ3BDLE9BQU8sQ0FBQyxHQUFHLENBQUUsS0FBSyxDQUFFLENBQUM7UUFDekIsQ0FBQyxDQUFFLENBQUM7UUFDSix3Q0FBd0M7UUFDeEMsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELDZFQUE2RTtJQUM3RSxTQUFTLENBQUcsT0FBZ0I7UUFDeEIsdURBQXVEO1FBQ3ZELElBQUksSUFBSSxHQUFTLElBQUksa0JBQUksQ0FBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLE9BQU8sQ0FBQyxLQUFLLEVBQUUsT0FBTyxDQUFDLE1BQU0sQ0FBRSxDQUFDO1FBQ2pFLDhEQUE4RDtRQUM5RCxPQUFPLG9CQUFNLENBQUMsTUFBTSxDQUFFLE9BQW9CLEVBQUUsSUFBSSxFQUFFLElBQUkscUJBQU8sQ0FBRSxHQUFHLEVBQUUsR0FBRyxDQUFFLENBQUUsQ0FBQztJQUNoRixDQUFDO0lBRUQsc0dBQXNHO0lBQ3RHLENBQUMsc0JBQXNCO1FBQ25CLG9EQUFvRDtRQUNwRCxJQUFJLE9BQU8sR0FBRyxvQ0FBYSxDQUFDLHVCQUF1QixFQUFFLENBQUM7UUFFdEQsb0NBQW9DO1FBQ3BDLE1BQU0sSUFBSSx1QkFBUyxDQUFFLEdBQUcsRUFBRSxDQUFDLEtBQUssSUFBSSxPQUFPLENBQUMsV0FBVyxDQUFFLENBQUM7UUFFMUQsa0NBQWtDO1FBQ2xDLElBQUssT0FBTyxDQUFDLFlBQVksQ0FBQyxTQUFTLEVBQ25DO1lBQ0ksZ0RBQWdEO1lBQ2hELElBQUksUUFBUSxHQUFHLE9BQU8sQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDO1lBRTFDLHVDQUF1QztZQUN2QyxRQUFRLENBQUMsT0FBTyxDQUFFLElBQUksQ0FBQyxFQUFFO2dCQUNyQiwrREFBK0Q7Z0JBQy9ELElBQUksQ0FBQyxhQUFhLENBQUUsSUFBSSxDQUFDLE1BQU0sQ0FBRSxDQUFDO1lBQ3RDLENBQUMsQ0FBRSxDQUFDO1NBRVA7YUFDRDtZQUNJLGlEQUFpRDtZQUNqRCxPQUFPLENBQUMsR0FBRyxDQUFFLDRCQUE2QixPQUFPLENBQUMsWUFBWSxDQUFDLE9BQVEsRUFBRSxDQUFFLENBQUM7U0FDL0U7SUFFTCxDQUFDO0NBQ0o7QUFyRUQsb0NBcUVDIn0=","assetPath":"Assets/FindAPair_Template/_Scripts/ThumbnailsCreator.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"userSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ThumbnailsCreator","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: c687fc10c8375b5749dcee6ab3a38997
   onlyWriteTrigger: 0
