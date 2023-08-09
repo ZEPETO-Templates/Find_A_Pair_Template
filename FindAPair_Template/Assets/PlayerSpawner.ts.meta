@@ -23,13 +23,12 @@ ScriptedImporter:
     ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
     ZEPETO_World_1 = require(\"ZEPETO.World\");\r\n// This script spawns a single
     player\r\nclass PlayerSpawner extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
-    Start() {\r\n        // this.thumbnailsCreator = this.thumbnailsCreatorObj.GetComponent<ThumbnailsCreator>();\r\n       
-    // Grab the user id specified from logging into zepeto through the editor. \r\n       
-    $extension(\"ZEPETO.Character.Controller.ZepetoPlayersExtension\").CreatePlayerWithUserId(ZEPETO_Character_Controller_1.ZepetoPlayers.instance,
+    Start() {\r\n        // Grab the user id specified from logging into zepeto through
+    the editor. \r\n        $extension(\"ZEPETO.Character.Controller.ZepetoPlayersExtension\").CreatePlayerWithUserId(ZEPETO_Character_Controller_1.ZepetoPlayers.instance,
     ZEPETO_World_1.WorldService.userId, new ZEPETO_Character_Controller_1.SpawnInfo(),
-    true);\r\n        // ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener( ()
-    => {\r\n        //     const player: LocalPlayer = ZepetoPlayers.instance.LocalPlayer;\r\n       
-    //     this.thumbnailsCreator.Setup( player.zepetoPlayer.userId );\r\n       
-    // } );\r\n    }\r\n}\r\nexports.default = PlayerSpawner;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxheWVyU3Bhd25lci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBsYXllclNwYXduZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBc0Q7QUFDdEQsNkVBQXlIO0FBQ3pILCtDQUE0QztBQUk1QyxxQ0FBcUM7QUFDckMsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtJQUk1RCxLQUFLO1FBQ0Qsd0ZBQXdGO1FBQ3hGLDJFQUEyRTtRQUMzRSxpRUFBdUIsc0JBQXNCLENBQTdDLDJDQUFhLENBQUMsUUFBUSxFQUF5QiwyQkFBWSxDQUFDLE1BQU0sRUFBRSxJQUFJLHVDQUFTLEVBQUUsRUFBRSxJQUFJLEVBQUc7UUFDNUYsaUVBQWlFO1FBQ2pFLHNFQUFzRTtRQUN0RSxrRUFBa0U7UUFFbEUsT0FBTztJQUVYLENBQUM7Q0FHSjtBQWpCRCxnQ0FpQkMifQ==","assetPath":"Assets/PlayerSpawner.ts","manifest":{"properties":[],"name":"PlayerSpawner","description":"","hasAnimatorMove":false},"isCompiled":true}'
-  typescriptHash: 7db06e7c9b8687046c6707d751125401
+    true);\r\n        ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedPlayer.AddListener((userId)
+    => {\r\n            let player = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.GetPlayer(userId);\r\n           
+    player.character.gameObject.name = userId;\r\n        });\r\n    }\r\n}\r\nexports.default
+    = PlayerSpawner;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxheWVyU3Bhd25lci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBsYXllclNwYXduZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBc0Q7QUFDdEQsNkVBQXVFO0FBQ3ZFLCtDQUE0QztBQUU1QyxxQ0FBcUM7QUFDckMsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtJQUU1RCxLQUFLO1FBQ0QsMkVBQTJFO1FBQzNFLGlFQUF1QixzQkFBc0IsQ0FBN0MsMkNBQWEsQ0FBQyxRQUFRLEVBQXdCLDJCQUFZLENBQUMsTUFBTSxFQUFFLElBQUksdUNBQVMsRUFBRSxFQUFFLElBQUksRUFBRTtRQUUxRiwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsV0FBVyxDQUFDLENBQUMsTUFBTSxFQUFFLEVBQUU7WUFDeEQsSUFBSSxNQUFNLEdBQUcsMkNBQWEsQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQ3RELE1BQU0sQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLElBQUksR0FBRyxNQUFNLENBQUM7UUFDOUMsQ0FBQyxDQUFDLENBQUM7SUFFUCxDQUFDO0NBR0o7QUFkRCxnQ0FjQyJ9","assetPath":"Assets/PlayerSpawner.ts","manifest":{"properties":[],"name":"PlayerSpawner","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: a645c2280e38002c9ad26e4289d22533
   onlyWriteTrigger: 0

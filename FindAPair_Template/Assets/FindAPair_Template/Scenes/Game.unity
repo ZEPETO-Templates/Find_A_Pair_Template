@@ -322,7 +322,7 @@ MonoBehaviour:
     lockXAxis: 0
     layer:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     speed: 20
     sensitivity: 5
     useEnhancedOption: 0
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 1083367842}
   - component: {fileID: 1083367841}
   - component: {fileID: 1083367840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Object
   m_Icon: {fileID: 0}
