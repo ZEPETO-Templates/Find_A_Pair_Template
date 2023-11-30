@@ -2,7 +2,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { GameObject, WaitForSeconds, WaitUntil } from 'UnityEngine';
 import { RoundedRectangleButton, ZepetoText } from 'ZEPETO.World.Gui';
 import GameManager from './GameManager';
-import { InputField } from 'UnityEngine.UI';
+import { InputField, Button } from 'UnityEngine.UI';
 import { UIZepetoPlayerControl, ZepetoPlayers } from 'ZEPETO.Character.Controller';
 import IconInteraction from '../IconInteraction';
 
@@ -22,7 +22,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
     @SerializeField() endPanel: GameObject; // Reference to the end panel
 
     @Header("Buttons")
-    @SerializeField() playBtn: RoundedRectangleButton; // Reference to the play button
+    @SerializeField() playBtn: Button; // Reference to the play button
     @SerializeField() exitBtn: RoundedRectangleButton; // Reference to the exit button 
     @SerializeField() rematchBtn: RoundedRectangleButton; // Reference to the rematch button
     @SerializeField() addOneBtn: RoundedRectangleButton; // Reference to the addOne button 
@@ -69,23 +69,8 @@ export default class UIManager extends ZepetoScriptBehaviour {
     // This function is responsible for setting the behaviors of the buttons.
     InitButtonsListeners() {
         // Set the behaviour of the play button
-        this.playBtn.OnClick.AddListener(() => {
-            // Set the result of the function LimitPairAmount of the GameManager on the pairs
-            this.pairs = GameManager.instance.LimitPairAmount(this.pairs);
-
-            // Show the value of pairs on the pairsInput text
-            this.pairsInput.text = this.pairs.toString();
-
-            // Call to the function to set the pair amount on the GameManager
-            GameManager.instance.SetPairAmount(this.pairs);
-
-            // Disable the buttons of the pairs settings
-            this.addOneBtn.enabled = false;
-            this.restOneBtn.enabled = false;
-            this.pairsInput.enabled = false;
-
-            // Call to the WaitToStart coroutine
-            this.StartCoroutine(this.WaitToStart());
+        this.playBtn.onClick.AddListener(() => {
+            this.OnClick();
         });
 
         // Set the behaviour of the rematch button
@@ -138,6 +123,25 @@ export default class UIManager extends ZepetoScriptBehaviour {
         // Call to the function ShowPanel void to hide all the panels
         this.ShowPanel();
     }
+
+    OnClick (): void { 
+     // Set the result of the function LimitPairAmount of the GameManager on the pairs
+     this.pairs = GameManager.instance.LimitPairAmount(this.pairs);
+
+     // Show the value of pairs on the pairsInput text
+     this.pairsInput.text = this.pairs.toString();
+
+     // Call to the function to set the pair amount on the GameManager
+     GameManager.instance.SetPairAmount(this.pairs);
+
+     // Disable the buttons of the pairs settings
+     this.addOneBtn.enabled = false;
+     this.restOneBtn.enabled = false;
+     this.pairsInput.enabled = false;
+
+     // Call to the WaitToStart coroutine
+     this.StartCoroutine(this.WaitToStart());
+    }; 
 
     // This coroutine is responsible for displaying the countdown before the start of the game.
     *WaitToStart() {
