@@ -124,24 +124,21 @@ export default class UIManager extends ZepetoScriptBehaviour {
         this.ShowPanel();
     }
 
-    OnClick (): void { 
-     // Set the result of the function LimitPairAmount of the GameManager on the pairs
-     this.pairs = GameManager.instance.LimitPairAmount(this.pairs);
+    OnClick(): void {
+        // Set the result of the function LimitPairAmount of the GameManager on the pairs
+        this.pairs = GameManager.instance.LimitPairAmount(this.pairs);
 
-     // Show the value of pairs on the pairsInput text
-     this.pairsInput.text = this.pairs.toString();
+        // Show the value of pairs on the pairsInput text
+        this.pairsInput.text = this.pairs.toString();
 
-     // Call to the function to set the pair amount on the GameManager
-     GameManager.instance.SetPairAmount(this.pairs);
+        // Disable the buttons of the pairs settings
+        this.addOneBtn.enabled = false;
+        this.restOneBtn.enabled = false;
+        this.pairsInput.enabled = false;
 
-     // Disable the buttons of the pairs settings
-     this.addOneBtn.enabled = false;
-     this.restOneBtn.enabled = false;
-     this.pairsInput.enabled = false;
-
-     // Call to the WaitToStart coroutine
-     this.StartCoroutine(this.WaitToStart());
-    }; 
+        // Call to the WaitToStart coroutine
+        this.StartCoroutine(this.WaitToStart());
+    };
 
     // This coroutine is responsible for displaying the countdown before the start of the game.
     *WaitToStart() {
@@ -162,7 +159,11 @@ export default class UIManager extends ZepetoScriptBehaviour {
             if (!GameManager.instance.cardsCreated) {
                 // We wait until the cards are created
                 yield new WaitUntil(() => GameManager.instance.cardsCreated == true);
+                // Call to the function to set the pair amount on the GameManager
+
             }
+            // Call to the function to set the pair amount on the GameManager
+            GameManager.instance.SetPairAmount(this.pairs);
         }
 
         // Then we will loop until the counter is less than 0
