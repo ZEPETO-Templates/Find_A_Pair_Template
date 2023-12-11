@@ -157,15 +157,17 @@ export default class UIManager extends ZepetoScriptBehaviour {
 
             // Check if the cards are not created
             if (!GameManager.instance.cardsCreated) {
+                console.log("Waiting cards...");
                 // We wait until the cards are created
                 yield new WaitUntil(() => GameManager.instance.cardsCreated == true);
                 // Call to the function to set the pair amount on the GameManager
 
             }
-            // Call to the function to set the pair amount on the GameManager
-            GameManager.instance.SetPairAmount(this.pairs);
-        }
 
+        }
+        // Call to the function to set the pair amount on the GameManager
+        GameManager.instance.SetPairAmount(this.pairs);
+        
         // Then we will loop until the counter is less than 0
         while (counter > 0) {
             // Update the counter text by the counter number
