@@ -36,6 +36,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
     @SerializeField() pairsFounded: ZepetoText; // Reference to the pairs founded text
     @SerializeField() totalTries: ZepetoText; // Reference to the total tries text
     @SerializeField() pairsInput: InputField; // Reference to the pairs input field
+    public infoStart: GameObject; //  Reference to the instructions to start the game
 
     @Header("Settings")
     @SerializeField() timeToStart: number; // This variable sets the time before the game starts
@@ -43,7 +44,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
     private pairs: number = 6; // This variable save amount of pairs defined on the pairsInput
 
     private controlUI: UIZepetoPlayerControl; // Reference to the UIZepetoPlayerControl to restrict the use when you are in the game
-
+    
     // Awake is called when an enabled script instance is being loaded.
     Awake() {
         // Singleton pattern
@@ -212,6 +213,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
             case UIPanel.Start:
                 // Active the start panel
                 this.startPanel.SetActive(true);
+                this.infoStart.SetActive(false);
                 break;
             case UIPanel.Game:
                 // Active the game panel
@@ -227,6 +229,7 @@ export default class UIManager extends ZepetoScriptBehaviour {
                 // Deactivate the exit buttton to close the game
                 this.exitBtn.gameObject.SetActive(false);
                 this.ControlPlayer(true);
+                this.infoStart.SetActive(true);
                 break;
         }
     }
