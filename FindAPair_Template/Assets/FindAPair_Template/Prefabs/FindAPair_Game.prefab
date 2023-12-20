@@ -133,8 +133,8 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 750, y: 1334}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -281,7 +281,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 3342043563519232176}
     - {fileID: 678226096604504484, guid: 54b2b2f8d24f05d4fbce1526faef7e23, type: 3}
-    - {fileID: 6689074789726875597, guid: ba04f7285ad383949a0bb55ef49ed3c9, type: 3}
+    - {fileID: 873626649913385869, guid: 84014be1896de45b4b5d1dc2589b5a8a, type: 3}
     - {fileID: 0}
     - {fileID: 865077609180163225}
     values:
@@ -348,8 +348,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24.900146, y: -32.19995}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -28, y: -28}
+  m_SizeDelta: {x: 64, y: 68}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8494497647091536868
 CanvasRenderer:
@@ -1207,6 +1207,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3737337401081965818, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
   m_PrefabInstance: {fileID: 2142836539123852362}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &583975394746293570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1560023371429689608, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
+  m_PrefabInstance: {fileID: 2142836539123852362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4236359869367215384 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2843584053744894290, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
@@ -1218,11 +1223,6 @@ MonoBehaviour:
   m_Script: {fileID: 1992568646, guid: eb020944284e149ba8281a465630e06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &583975394746293570 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1560023371429689608, guid: 525362f3d9b0ce74eac217578ab2d6e3, type: 3}
-  m_PrefabInstance: {fileID: 2142836539123852362}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7239047887486297257
 PrefabInstance:
   m_ObjectHideFlags: 0

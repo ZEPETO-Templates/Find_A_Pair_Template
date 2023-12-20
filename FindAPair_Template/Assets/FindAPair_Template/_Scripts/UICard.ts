@@ -11,6 +11,7 @@ export default class UICard extends ZepetoScriptBehaviour {
     public id: number; // This variables will be used to compare the card with others
     public hiddenSprite: Sprite; // This will be the sprite that will be showed when the card is hidden
     public showingSprite: Sprite; // This will be the sprite that will be showed when the card is showing
+    public coverFrame: Image; // Reference to the cover frame of the card
 
     private founded: bool; // flag to know if the card was founded with his pair
     private showing: bool; // flag to know if the card is showing his image
@@ -45,12 +46,14 @@ export default class UICard extends ZepetoScriptBehaviour {
         if ( show )
         {
             this.image.gameObject.SetActive( true );
+            this.coverFrame.gameObject.SetActive( true );
             // Set the icon of the image on the showing sprite
             this.image.sprite = this.showingSprite;
         }
         else
         {
             this.image.gameObject.SetActive( false );
+            this.coverFrame.gameObject.SetActive( false );
             // Set the icon of the image on the hidden sprite
             this.image.sprite = this.hiddenSprite;
         }

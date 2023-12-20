@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6048537, g: 0.5430254, b: 0.6573954, a: 1}
+  m_IndirectSpecularColor: {r: 0.60595566, g: 0.54349744, b: 0.65797794, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,63 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &67066226
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1106358784006332, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_Name
-      value: ZepetoDefaultLight
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.535
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.3034556
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.5803992
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7500593
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.091992095
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 150.643
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 23.564
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974547296231774, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -249.211
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bd2748865ddd241c2930897e40ceabec, type: 3}
 --- !u!1001 &485953096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,8 +311,18 @@ MonoBehaviour:
   OnRemovedPlayer:
     m_PersistentCalls:
       m_Calls: []
-  setting: {fileID: 0}
   cameraData:
+    speed: 20
+    sensitivity: 5
+    useEnhancedOption: 1
+    enhancedOptionData:
+      zoomSpeed: 2
+      zoomDampSpeed: 5
+      rotationSpeed: 4
+      rotationDampSpeed: 15
+      viewportMargin: 3
+      characterCulling: 1
+      targetScaleWeight: 1
     cameraPrefab: {fileID: 5806182858035002866, guid: 5be4eddc5b02f4ec0a07a69db26df962, type: 3}
     maxZoomDistance: 15
     minZoomDistance: 1
@@ -380,19 +333,58 @@ MonoBehaviour:
     layer:
       serializedVersion: 2
       m_Bits: 64
-    speed: 20
-    sensitivity: 5
-    useEnhancedOption: 0
-    enhancedOptionData:
-      zoomSpeed: 2
-      zoomDampSpeed: 5
-      rotationSpeed: 4
-      rotationDampSpeed: 15
-      viewportMargin: 3
-      characterCulling: 1
-      targetScaleWeight: 1
     collisionTimeThreshold: 0.1
   characterData:
+    motionController: 1
+    motionV1Data:
+      walkSpeed: 2
+      runSpeed: 5
+      jumpPower: 5
+      animatorController: {fileID: 0}
+      runThreshold: 0.8
+    motionV2Data:
+      walkSpeed: 2
+      runSpeed: 4
+      jumpPower: 13
+      animatorController: {fileID: 0}
+      useDoubleJump: 0
+      doubleJumpPower: 13
+      useLanding: 1
+      useLandingRoll: 0
+      landingRollSpeed: 4
+      checkUseLandingUpdated: 0
+      useMoveTurn: 0
+      Gravity: 50
+      GravityRestoreRate: 1.018
+      GravityHorizontalWeight: 0.08
+      walkThreshold: 0.3
+      runThreshold: 0.5
+      fallingTimeThreshold: 0.08
+      fallingSpeedThreshold: 18
+      landingTimeThreshold: 0.038
+      landingSpeedThreshold: 30
+      landingImpactSpeedThreshold: 40
+      landingRollSpeedThreshold: 0.1
+      landingCastScaleWeight: 0.1
+      moveTurnAngleThreshold: 0.5
+      moveTurnSpeedThreshold: 0.5
+      moveTurnTimeThreshold: 0.3
+      moveTurnReleaseTime: 0.6
+      moveTurnReverseSpeed: 0.56
+      jumpDashSpeedThreshold: 0.95
+      walkClipBaseSpeed: 0.01
+      firstJumpCurveTime: 0.4
+      secondJumpCurveTime: 0.764
+      firstDoubleJumpCurveTime: 0.4
+      secondDoubleJumpCurveTime: 0.7
+      stampClipPlayTime: 1
+      landingClipPlayTime: 1
+      landingRollClipPlayTime: 0.8
+      moveTurnClipPlayTime: 0.591
+      jumpEaseSpeedThreshold: 2
+      jumpEaseSpeedRate: 0.1
+      jumpDoubleAvailableTimeUp: 1
+      jumpDoubleAvailableTimeDown: 1
     slopeLimit: 45
     stepOffset: 0.3
     skinWidth: 0.0001
@@ -400,15 +392,52 @@ MonoBehaviour:
     center: {x: 0, y: 0.6, z: 0}
     radius: 0.23
     height: 1.2
-    walkSpeed: 2
-    runSpeed: 5
-    jumpPower: 5
     layer:
       serializedVersion: 2
       m_Bits: 0
-    animatorController: {fileID: 9100000, guid: d45416f714b4fe74d9ddc118caf5f7c9, type: 2}
     shadow: {fileID: 1025544020809228, guid: 4512418b2a1844f42961867ad8421ab8, type: 3}
-    motionController: 1
+    animatorController: {fileID: 9100000, guid: d45416f714b4fe74d9ddc118caf5f7c9, type: 2}
+    walkSpeed: 2
+    runSpeed: 5
+    jumpPower: 5
+    customMotionData:
+      useDoubleJump: 1
+      doubleJumpPower: 13
+      useLanding: 1
+      useLandingRoll: 1
+      landingRollSpeed: 4
+      useMoveTurn: 1
+      gravity: 50
+      gravityRestoreRate: 1.018
+      gravityHorizontalWeight: 0.08
+      walkThreshold: 0.3
+      runThreshold: 0.5
+      fallingTimeThreshold: 0.08
+      fallingSpeedThreshold: 18
+      landingTimeThreshold: 0.038
+      landingSpeedThreshold: 30
+      landingImpactSpeedThreshold: 40
+      landingRollSpeedThreshold: 0.1
+      landingCastScaleWeight: 0.1
+      moveTurnAngleThreshold: 0.5
+      moveTurnSpeedThreshold: 0.5
+      moveTurnTimeThreshold: 0.3
+      moveTurnReleaseTime: 0.6
+      moveTurnReverseSpeed: 0.56
+      jumpDashSpeedThreshold: 0.95
+      walkClipBaseSpeed: 0.01
+      jumpEaseSpeedThreshold: 2
+      jumpEaseSpeedRate: 0.1
+      firstJumpCurveNormalizedTime: 0.4
+      secondJumpCurveNormalizedTime: 0.764
+      firstDoubleJumpCurveNormalizedTime: 0.4
+      secondDoubleJumpCurveNormalizedTime: 0.7
+      stampClipNormalizedTime: 1
+      landingClipNormalizedTime: 0.8
+      landingRollClipNormalizedTime: 0.8
+      moveTurnClipNormalizedTime: 0.591
+      jumpDoubleAvailableAscentRatio: 1
+      jumpDoubleAvailableDescentRatio: 1
   controllerData:
     inputAsset: {fileID: -944628639613478452, guid: 090135bc9e5ee4c89b1642240eb723fe, type: 3}
     eventSystem: {fileID: 7328100774219155841, guid: 67971ba158b48401988f9aad07940d6f, type: 3}
@@ -425,6 +454,7 @@ MonoBehaviour:
     showBubbleChatLocalPlayer: 1
     showBubbleChatOtherPlayers: 1
     useMiniProfileOnApp: 1
+  setting: {fileID: 0}
   motionV1Data:
     walkSpeed: 2
     runSpeed: 5
@@ -438,8 +468,10 @@ MonoBehaviour:
     animatorController: {fileID: 9100000, guid: d45416f714b4fe74d9ddc118caf5f7c9, type: 2}
     useDoubleJump: 0
     doubleJumpPower: 13
+    useLanding: 1
     useLandingRoll: 0
     landingRollSpeed: 4
+    checkUseLandingUpdated: 0
     useMoveTurn: 0
     Gravity: 50
     GravityRestoreRate: 1.018
