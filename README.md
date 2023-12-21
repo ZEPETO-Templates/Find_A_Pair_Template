@@ -32,10 +32,6 @@ To make things easier, there is a prefab called "FindAPair_Game" that you can dr
 
 <br><img src = "docs/images/fapt_prefab.png" alt ="fapt prefab img"></img><br>
 
-**UIManager**
-In the UIManager you have the option to select how much it tooks to start the game. (the 3..2..1.. start!)
-
-<br><img src = "docs/images/uimanager.png" alt = "uimanager img"></img><br>
 
 **GameManager**
 The GameManager shows a lot of info.
