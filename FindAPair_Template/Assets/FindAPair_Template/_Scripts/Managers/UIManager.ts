@@ -38,8 +38,12 @@ export default class UIManager extends ZepetoScriptBehaviour {
     @SerializeField() pairsInput: InputField; // Reference to the pairs input field
     public infoStart: GameObject; //  Reference to the instructions to start the game
 
-    @Header("Settings")
-    @SerializeField() timeToStart: number; // This variable sets the time before the game starts
+    @Header("Counter")
+    private timeToStart: number = 4; // This variable sets the time before the game starts
+    public counter1: GameObject; // Reference to the image of the counter
+    public counter2: GameObject; // Reference to the image of the counter
+    public counter3: GameObject; // Reference to the image of the counter
+    public counterStart: GameObject;
 
     private pairs: number = 6; // This variable save amount of pairs defined on the pairsInput
 
@@ -62,7 +66,8 @@ export default class UIManager extends ZepetoScriptBehaviour {
             // Find a object with the type of UIZepetoPlayerControl and set it on the variable
             this.controlUI = GameObject.FindObjectOfType<UIZepetoPlayerControl>();
         });
-
+        // Deactivate all counter GameObjects
+        this.DeactivateCounters();
         // Call to the function InitButtonsListeners
         this.InitButtonsListeners();
     }
@@ -150,9 +155,10 @@ export default class UIManager extends ZepetoScriptBehaviour {
         this.counterObj.SetActive(true);
         // Deactivate the startMenu
         this.startMenu.SetActive(false);
-
+    
         // Check if all the cards are created so we can start
         if (!GameManager.instance.cardsCreated) {
+            this.DeactivateCounters();
             // We show that we are creating the cards on the screen
             this.counterText.text = "Creating cards...";
 
@@ -171,19 +177,28 @@ export default class UIManager extends ZepetoScriptBehaviour {
         
         // Then we will loop until the counter is less than 0
         while (counter > 0) {
-            // Update the counter text by the counter number
-            this.counterText.text = counter.toString();
+            switch (counter)
+        {
+            case 4:
+                this.counter3.SetActive(true);
+                break;
+            case 3:
+                this.counter2.SetActive(true);
+                break;
+            case 2:
+                this.counter1.SetActive(true);
+                break;
+            case 1:
+                this.counterStart.SetActive(true);
+                break;
+        }
 
             // Wait 1 second
             yield new WaitForSeconds(1);
-
+            this.DeactivateCounters();
             // Rest 1 to counter
             counter--;
-            // Update the counter text by the counter number
-            this.counterText.text = counter.toString();
         }
-        // Once the time is 0 we show the Start! word on the counter text
-        this.counterText.text = "Start!";
 
         // Then wait 1 second
         yield new WaitForSeconds(1);
@@ -260,5 +275,13 @@ export default class UIManager extends ZepetoScriptBehaviour {
         // Check if the player have to be active and set the camera sensitivity on 5 or 0 
         if (activePlayer) ZepetoPlayers.instance.cameraData.sensitivity = 5;
         else ZepetoPlayers.instance.cameraData.sensitivity = 0;
+    }
+
+    // Deactivate all counter GameObjects
+    DeactivateCounters() {       
+    this.counter1.SetActive(false);
+    this.counter2.SetActive(false);
+    this.counter3.SetActive(false);
+     this.counterStart.SetActive(false);
     }
 }
