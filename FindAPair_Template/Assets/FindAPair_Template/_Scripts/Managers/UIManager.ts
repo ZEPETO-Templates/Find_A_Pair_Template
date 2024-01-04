@@ -200,8 +200,6 @@ export default class UIManager extends ZepetoScriptBehaviour {
             counter--;
         }
 
-        // Then wait 1 second
-        yield new WaitForSeconds(1);
         // And enable again all the buttons of the pairs settings on the start panel
         this.addOneBtn.enabled = true;
         this.restOneBtn.enabled = true;
