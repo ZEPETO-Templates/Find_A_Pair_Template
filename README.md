@@ -1,17 +1,17 @@
 
-# Find a pair game
+# Find a Pair game
 
 ## 📢 About
 
-Nice to meet you Creators! 👋 Welcome to Runner template guide!
+Nice to meet you Creators! 👋 Welcome to Find a Pair template guide! <br> 
 
-With Runner you can create amazing worlds to play with your friends!
+With Find a Pair you can create amazing worlds to play with your friends! <br> 
 
-Now, are you ready to start?
+Now, are you ready to start? <br> 
 
   
 
-## ❓ How to create with Runner template
+## ❓ How to create with Find a Pair template
 
 :wrench: Installation and settings
 
@@ -22,18 +22,19 @@ Now, are you ready to start?
   
 
 > 💡 Enjoy and start creating with the Template! :tada:
-
+<br> 
   
 
 ## 🔨 Tools
+<br> 
 
-**Game prefab**
+- **Game prefab:**
 To make things easier, there is a prefab called "FindAPair_Game" that you can drag into your game scene, and the mini-game will be already functional. You just need to place it wherever you want.
 
-<br><img src = "docs/images/fapt_prefab.png" alt ="fapt prefab img"></img><br>
+<br><img src = "docs/images/fapt_prefab.png" alt ="fapt prefab img"></img><br><br> 
 
 
-**GameManager**
+- **GameManager:**
 The GameManager shows a lot of info.
 
 | Variable       | Utility                                                                                                     |
@@ -44,9 +45,9 @@ The GameManager shows a lot of info.
 | Card Prefab    | A reference to the card prefab                                                                              |
 | Sprites        | The list of the sprites that can appear on the cards                                                        |
 
-<br><img src = "docs/images/gamemanager.png" alt = "gamemanager img"></img><br>
+<br><img src = "docs/images/gamemanager.png" alt = "gamemanager img"></img><br><br> 
 
-**Card Prefab**
+- **Card Prefab:**
 The card prefab is how look the cards that will be created on the game.
 They have the UICard script that have some important references.
 
@@ -58,18 +59,20 @@ They have the UICard script that have some important references.
 | Hidden Sprite  | This sprite will be shown when the card is 'hidden'                                  |
 | Showing Sprite | This sprite will be shown when the card is 'Showing'                                 |
 
-<br><img src = "docs/images/cardprefab.png" alt = "gamemanager img"></img><br>
+<br><img src = "docs/images/cardprefab.png" alt = "gamemanager img"></img><br><br> 
 
-**Row Prefab**
+- **Row Prefab:**
 The row prefab is like a parent with the "Horizontal layout group" component to order the cards that will be created.
+<br> 
 
-**NPCCreator**
+- **NPCCreator:**
 The NPCCreator has its own documentation in ZEPETO docs, here is the link to check it out! https://docs.zepeto.me/studio-world/docs/creating-and-controlling-npc
+<br> 
 
-**IconInteraction**
+- **IconInteraction:**
 The IconInteraction like the NPCCreator have his own docs here: 
 https://docs.zepeto.me/studio-world/docs/interacting-with-an-object#step-2--setting-the-object
-If you want to change the icon that appears over the npc you have to change the PrefIconCanvas prefab
+If you want to change the icon that appears over the NPC you have to change the PrefIconCanvas prefab
 <br><img src = "docs/images/IconInteractionPrefab.png" alt = "Icon Interaction Canvas img"></img><br>
 <br><img src = "docs/images/IconInteractionCanvas.png" alt = "Icon Interaction Canvas img"></img><br>
 
